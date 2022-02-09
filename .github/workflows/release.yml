@@ -15,16 +15,6 @@ on:
         description: 'Publish: If want ignore'
         required: false
 jobs:
-  check:
-    name: Check Access
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Check access"
-        uses: "lannonbr/repo-permission-check-action@2.0.0"
-        with:
-          permission: "write"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -37,11 +27,7 @@ jobs:
           path: ~/.gradle
           key: gradle-${{ hashFiles('**/*.gradle.kts') }}
       - name: Release Build
-        env:
-          BUILD_PLUGIN: none
         run: |
-          echo "sdk.dir=${ANDROID_HOME}" > local.properties
-          echo "ndk.dir=${ANDROID_HOME}/ndk/23.1.7779620" >> local.properties
           export LOCAL_PROPERTIES="${{ secrets.LOCAL_PROPERTIES }}"
           bash requirement.sh
           dl=1 bash make.sh ${{ github.event.inputs.plugin }}
