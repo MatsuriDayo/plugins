@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="moe.matsuri.plugin.brook"
+    android:installLocation="internalOnly">
+
+    <application
+        android:allowBackup="false"
+        android:extractNativeLibs="true"
+        android:label="Brook Plugin">
+        <provider
+            android:name=".BinaryProvider"
+            android:authorities="moe.matsuri.plugin.brook.BinaryProvider"
+            android:directBootAware="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider">
+            <intent-filter>
+                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
+                <data
+                    android:host="io.nekohasekai.sagernet"
+                    android:path="/moe.matsuri.plugin.brook"
+                    android:scheme="plugin" />
+            </intent-filter>
+
+            <meta-data
+                android:name="io.nekohasekai.sagernet.plugin.id"
+                android:value="moe.matsuri.plugin.brook" />
+            <meta-data
+                android:name="io.nekohasekai.sagernet.plugin.executable_path"
+                android:value="libbrook.so" />
+        </provider>
+    </application>
+
+</manifest>

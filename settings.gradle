@@ -9,3 +9,4 @@ rootProject.name = "Neko Plugins"
 
 include ':common'
 include ':app_xray'
+include ':app_brook'

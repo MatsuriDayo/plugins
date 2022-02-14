@@ -5,7 +5,7 @@ import { Base64 } from 'js-base64';
 
 class vlessClass {
     constructor() {
-        this.sharedStorage = {} // For UI only
+        this.sharedStorage = {}
         this.defaultSharedStorage = {}
         this.common = new commomClass()
     }
