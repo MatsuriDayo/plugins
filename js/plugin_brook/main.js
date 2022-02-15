@@ -22,6 +22,7 @@ export function nekoInit(b64Str) {
                 "links": ["brook://"],
                 "haveStandardLink": true,
                 "canShare": true,
+                "canMux": false,
                 "canMapping": true,
                 "canTCPing": true,
                 "canICMPing": true,

@@ -19,6 +19,7 @@ export function nekoInit(b64Str) {
                 "links": ["vless://"],
                 "haveStandardLink": true,
                 "canShare": true,
+                "canMux": true,
                 "canMapping": true,
                 "canTCPing": true,
                 "canICMPing": true,

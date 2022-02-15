@@ -500,6 +500,14 @@ class vlessClass {
             let args = util.decodeB64Str(b64Str)
             let ss = util.decodeB64Str(args.sharedStorage)
 
+            let canMux = false
+            if (ss.serverNetwork == "tcp" || ss.serverNetwork == "ws" || ss.serverNetwork == "h2") {
+                canMux = true
+            }
+            if (ss.serverSecurity == "xtls"){
+                canMux = false
+            }
+
             let t0 = {
                 "log": {
                     "loglevel": "debug"
@@ -536,7 +544,7 @@ class vlessClass {
                             "network": ss.serverNetwork,
                             "security": ss.serverSecurity,
                             "mux": {
-                                "enabled": args.muxEnabled,
+                                "enabled": args.muxEnabled && canMux,
                                 "concurrency": args.muxConcurrency
                             },
                         }
