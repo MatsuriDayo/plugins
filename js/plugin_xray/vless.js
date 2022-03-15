@@ -504,7 +504,7 @@ class vlessClass {
             if (ss.serverNetwork == "tcp" || ss.serverNetwork == "ws" || ss.serverNetwork == "h2") {
                 canMux = true
             }
-            if (ss.serverSecurity == "xtls"){
+            if (ss.serverSecurity == "xtls") {
                 canMux = false
             }
 
@@ -524,6 +524,10 @@ class vlessClass {
                 ],
                 "outbounds": [
                     {
+                        "mux": {
+                            "enabled": args.muxEnabled && canMux,
+                            "concurrency": args.muxConcurrency
+                        },
                         "protocol": "vless",
                         "settings": {
                             "vnext": [
@@ -543,10 +547,6 @@ class vlessClass {
                         "streamSettings": {
                             "network": ss.serverNetwork,
                             "security": ss.serverSecurity,
-                            "mux": {
-                                "enabled": args.muxEnabled && canMux,
-                                "concurrency": args.muxConcurrency
-                            },
                         }
                     }
                 ]

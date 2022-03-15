@@ -15,7 +15,7 @@ unzip_xray() {
 }
 
 download_xray() {
-  VERSION="v1.5.3"
+  VERSION="v1.5.4"
   mkdir_libs "app_xray/libs"
 
   curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-android-arm64-v8a.zip"
