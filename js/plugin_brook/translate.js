@@ -48,10 +48,10 @@ export var translates = {
         "zh_CN": "WebSocket 路径",
     },
     "withoutBrookProtocol": {
-        "": "withou Brook Protocol"
+        "": "Without Brook Protocol"
     },
     "withoutBrookProtocol_summary": {
-        "zh_CN": "数据不使用 Brook 协议进行强加密，性能更好",
+        "zh_CN": "不使用 Brook 协议加密，性能更好",
         "": "Better performance, but data is not strongly encrypted using Brook protocol",
     },
 }
