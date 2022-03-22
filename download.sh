@@ -33,7 +33,7 @@ dl_and_chmod() {
 }
 
 download_brook() {
-  VERSION="v20210701"
+  VERSION="v20220406"
   mkdir_libs "app_brook/libs"
 
   dl_and_chmod arm64-v8a/libbrook.so "https://github.com/txthinking/brook/releases/download/$VERSION/brook_linux_arm64"

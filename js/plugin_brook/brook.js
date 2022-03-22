@@ -304,7 +304,7 @@ class brookClass {
             v.nekoCommands.push(internalUri)
 
             if (cs.serverProtocol.startsWith("ws")) {
-                v.nekoCommands.push("--serverAddress")
+                v.nekoCommands.push("--address")
                 v.nekoCommands.push(util.wrapUri(args.finalAddress, args.finalPort))
             }
 
