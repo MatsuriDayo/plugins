@@ -51,7 +51,18 @@ export var translates = {
         "": "Without Brook Protocol"
     },
     "withoutBrookProtocol_summary": {
-        "zh_CN": "不使用 Brook 协议加密，性能更好",
-        "": "Better performance, but data is not strongly encrypted using Brook protocol",
+        "zh_CN": "不使用 Brook 协议",
+        "": "Don't use Brook protocol",
+    },
+    "serverAllowInsecure": {
+        "zh_CN": "允许不安全的连接",
+        "": "Allow insecure",
+    },
+    "serverAllowInsecure_summary": {
+        "zh_CN": "禁用证书检查. 启用后该配置安全性相当于明文",
+        "": "Disable certificate checking. When enabled, this configuration is as secure as plaintext.",
+    },
+    "udpovertcp": {
+        "": "UDP over TCP",
     },
 }

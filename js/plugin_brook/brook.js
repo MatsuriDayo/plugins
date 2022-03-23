@@ -19,7 +19,9 @@ class brookClass {
         this.defaultSharedStorage.serverProtocol = "default"
         this.defaultSharedStorage.serverPassword = ""
         this.defaultSharedStorage.serverPath = ""
+        this.defaultSharedStorage.serverAllowInsecure = false
         this.defaultSharedStorage.withoutBrookProtocol = false
+        this.defaultSharedStorage.udpovertcp = false
 
 
         for (var k in this.defaultSharedStorage) {
@@ -79,9 +81,6 @@ class brookClass {
         if (this.sharedStorage.name.isNotBlank()) {
             builder.searchParams.set("remarks", this.sharedStorage.name)
         }
-        if (this.sharedStorage.withoutBrookProtocol == true) {
-            builder.searchParams.set("withoutBrookProtocol", "true")
-        }
 
         this.sharedStorage.shareLink = builder.toString()
     }
@@ -127,8 +126,20 @@ class brookClass {
                     },
                     {
                         "type": "SwitchPreference",
+                        "key": "serverAllowInsecure",
+                        "icon": "ic_baseline_warning_24",
+                        "summary": TR("serverAllowInsecure_summary")
+                    },
+                    {
+                        "type": "SwitchPreference",
                         "key": "withoutBrookProtocol",
+                        "icon": "baseline_public_24",
                         "summary": TR("withoutBrookProtocol_summary")
+                    },
+                    {
+                        "type": "SwitchPreference",
+                        "key": "udpovertcp",
+                        "icon": "baseline_wrap_text_24",
                     },
                 ]
             },
@@ -178,11 +189,19 @@ class brookClass {
 
     _onPreferenceChanged(key, newValue) {
         if (key == "serverProtocol") {
+            if (newValue == "wss") {
+                neko.setPreferenceVisibility("serverAllowInsecure", true)
+            } else {
+                neko.setPreferenceVisibility("serverAllowInsecure", false)
+            }
             if (newValue == "default") {
                 neko.setPreferenceVisibility("serverPath", false)
+                neko.setPreferenceVisibility("withoutBrookProtocol", false)
+                neko.setPreferenceVisibility("udpovertcp", true)
             } else {
                 neko.setPreferenceVisibility("serverPath", true)
                 neko.setPreferenceVisibility("withoutBrookProtocol", true)
+                neko.setPreferenceVisibility("udpovertcp", false)
             }
         }
     }
@@ -315,17 +334,24 @@ class brookClass {
             v.nekoCommands.push(internalUri)
 
             if (cs.serverProtocol.startsWith("ws")) {
+                if (cs.withoutBrookProtocol) {
+                    v.nekoCommands.push("--withoutBrookProtocol")
+                }
+                if (cs.serverProtocol == "wss" && cs.serverAllowInsecure) {
+                    v.nekoCommands.push("--insecure")
+                }
+                // Mapping
                 v.nekoCommands.push("--address")
                 v.nekoCommands.push(util.wrapUri(args.finalAddress, args.finalPort))
+            } else {
+                if (cs.udpovertcp) {
+                    v.nekoCommands.push("--udpovertcp")
+                }
             }
 
             if (cs.serverPassword.isNotBlank()) {
                 v.nekoCommands.push("--password")
                 v.nekoCommands.push(cs.serverPassword)
-            }
-
-            if (cs.withoutBrookProtocol == true) {
-                v.nekoCommands.push("--withoutBrookProtocol")
             }
 
             v.nekoCommands.push("--socks5")
