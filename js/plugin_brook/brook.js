@@ -19,6 +19,8 @@ class brookClass {
         this.defaultSharedStorage.serverProtocol = "default"
         this.defaultSharedStorage.serverPassword = ""
         this.defaultSharedStorage.serverPath = ""
+        this.defaultSharedStorage.withoutBrookProtocol = false
+
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k]
@@ -77,6 +79,9 @@ class brookClass {
         if (this.sharedStorage.name.isNotBlank()) {
             builder.searchParams.set("remarks", this.sharedStorage.name)
         }
+        if (this.sharedStorage.withoutBrookProtocol == true) {
+            builder.searchParams.set("withoutBrookProtocol", "true")
+        }
 
         this.sharedStorage.shareLink = builder.toString()
     }
@@ -119,6 +124,11 @@ class brookClass {
                         "type": "EditTextPreference",
                         "key": "serverPath",
                         "icon": "ic_baseline_format_align_left_24",
+                    },
+                    {
+                        "type": "SwitchPreference",
+                        "key": "withoutBrookProtocol",
+                        "summary": TR("withoutBrookProtocol_summary")
                     },
                 ]
             },
@@ -172,6 +182,7 @@ class brookClass {
                 neko.setPreferenceVisibility("serverPath", false)
             } else {
                 neko.setPreferenceVisibility("serverPath", true)
+                neko.setPreferenceVisibility("withoutBrookProtocol", true)
             }
         }
     }
@@ -304,13 +315,17 @@ class brookClass {
             v.nekoCommands.push(internalUri)
 
             if (cs.serverProtocol.startsWith("ws")) {
-                v.nekoCommands.push("--serverAddress")
+                v.nekoCommands.push("--address")
                 v.nekoCommands.push(util.wrapUri(args.finalAddress, args.finalPort))
             }
 
             if (cs.serverPassword.isNotBlank()) {
                 v.nekoCommands.push("--password")
                 v.nekoCommands.push(cs.serverPassword)
+            }
+
+            if (cs.withoutBrookProtocol == true) {
+                v.nekoCommands.push("--withoutBrookProtocol")
             }
 
             v.nekoCommands.push("--socks5")

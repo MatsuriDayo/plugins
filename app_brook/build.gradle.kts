@@ -9,6 +9,6 @@ android {
     defaultConfig {
         applicationId = "moe.matsuri.plugin.brook"
         versionCode = 1
-        versionName = "v20210701-1"
+        versionName = "v20220406-1"
     }
 }
