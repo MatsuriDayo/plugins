@@ -43,6 +43,14 @@ export var translates = {
         "zh_CN": "加密",
         "": "Encryption",
     },
+    "serverMethod": {
+        "zh_CN": "加密方式",
+        "": "Encryption method",
+    },
+    "serverPassword": {
+        "zh_CN": "密码",
+        "": "Password",
+    },
     "serverNetwork": {
         "zh_CN": "传输协议",
         "": "Network",

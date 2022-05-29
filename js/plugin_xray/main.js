@@ -1,4 +1,5 @@
 import { vless } from "./vless.js"
+import { ss2022 } from "./ss2022.js"
 import { util } from "./common/util.js"
 import { LANG } from "./translate.js"
 
@@ -24,6 +25,16 @@ export function nekoInit(b64Str) {
                 "canTCPing": true,
                 "canICMPing": true,
                 "needBypassRootUid": false,
+            },
+            {
+                "protocolId": "Shadowsocks-2022",
+                "haveStandardLink": false,
+                "canShare": false,
+                "canMux": false,
+                "canMapping": true,
+                "canTCPing": true,
+                "canICMPing": true,
+                "needBypassRootUid": false,
             }
         ]
     }
@@ -33,6 +44,9 @@ export function nekoInit(b64Str) {
 export function nekoProtocol(protocolId) {
     if (protocolId == "VLESS") {
         return vless
+    }
+    if (protocolId == "Shadowsocks-2022") {
+        return ss2022
     }
 }
 
