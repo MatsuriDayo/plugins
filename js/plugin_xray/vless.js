@@ -13,6 +13,7 @@ class vlessClass {
     _initDefaultSharedStorage() {
         // start of default keys
         this.defaultSharedStorage.jsVersion = 1
+        this.defaultSharedStorage.insecureHint = ""
         this.defaultSharedStorage.name = ""
         this.defaultSharedStorage.serverAddress = "127.0.0.1"
         this.defaultSharedStorage.serverPort = "1080"
@@ -52,6 +53,16 @@ class vlessClass {
             }
         }
         this._setShareLink()
+        this.sharedStorage.insecureHint = this._insecureHint()
+    }
+
+    _insecureHint() {
+        if (this.sharedStorage.serverSecurity == "none") {
+            return TR("insecure_cleartext")
+        } else if (this.sharedStorage.serverSecurity == "xtls") {
+            return TR("insecure_xtls")
+        }
+        return ""
     }
 
     _setShareLink() {
