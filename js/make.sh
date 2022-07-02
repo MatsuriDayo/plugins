@@ -1,5 +1,8 @@
 set -e
 
+# SN Plugin -> no js build
+[ $1 == "hysteria" ] && exit
+
 HTML=../app_$1/html
 SRC=./plugin_$1
 
