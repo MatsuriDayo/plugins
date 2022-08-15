@@ -15,7 +15,7 @@ unzip_xray() {
 }
 
 download_xray() {
-  VERSION="v1.5.8"
+  VERSION="v1.5.9"
   mkdir_libs "app_xray/libs"
 
   curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-android-arm64-v8a.zip"
@@ -33,13 +33,23 @@ dl_and_chmod() {
 }
 
 download_brook() {
-  VERSION="v20220406"
+  VERSION="v20220707"
   mkdir_libs "app_brook/libs"
 
   dl_and_chmod arm64-v8a/libbrook.so "https://github.com/txthinking/brook/releases/download/$VERSION/brook_linux_arm64"
   dl_and_chmod armeabi-v7a/libbrook.so "https://github.com/txthinking/brook/releases/download/$VERSION/brook_linux_arm7"
   dl_and_chmod x86/libbrook.so "https://github.com/txthinking/brook/releases/download/$VERSION/brook_linux_386"
   dl_and_chmod x86_64/libbrook.so "https://github.com/txthinking/brook/releases/download/$VERSION/brook_linux_amd64"
+}
+
+download_hysteria() {
+  VERSION="v1.2.0-1"
+  mkdir_libs "app_hysteria/libs"
+
+  dl_and_chmod arm64-v8a/libhysteria.so "https://github.com/MatsuriDayo/hysteria/releases/download/$VERSION/hysteria-linux-arm64"
+  dl_and_chmod armeabi-v7a/libhysteria.so "https://github.com/MatsuriDayo/hysteria/releases/download/$VERSION/hysteria-linux-arm"
+  dl_and_chmod x86/libhysteria.so "https://github.com/MatsuriDayo/hysteria/releases/download/$VERSION/hysteria-linux-386"
+  dl_and_chmod x86_64/libhysteria.so "https://github.com/MatsuriDayo/hysteria/releases/download/$VERSION/hysteria-linux-amd64"
 }
 
 download_"$1"
