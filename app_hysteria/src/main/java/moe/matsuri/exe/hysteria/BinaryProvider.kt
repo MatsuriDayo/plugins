@@ -1,4 +1,4 @@
-package io.nekohasekai.sagernet.plugin.hysteria
+package moe.matsuri.exe.hysteria
 
 import android.net.Uri
 import android.os.ParcelFileDescriptor
@@ -14,8 +14,10 @@ class BinaryProvider : NativePluginProvider() {
 
     override fun getExecutable() = context!!.applicationInfo.nativeLibraryDir + "/libhysteria.so"
     override fun openFile(uri: Uri): ParcelFileDescriptor = when (uri.path) {
-        "/hysteria-plugin" -> ParcelFileDescriptor.open(File(getExecutable()),
-            ParcelFileDescriptor.MODE_READ_ONLY)
+        "/hysteria-plugin" -> ParcelFileDescriptor.open(
+            File(getExecutable()),
+            ParcelFileDescriptor.MODE_READ_ONLY
+        )
         else -> throw FileNotFoundException()
     }
 }

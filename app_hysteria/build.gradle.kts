@@ -7,8 +7,8 @@ setupAll()
 
 android {
     defaultConfig {
-        applicationId = "io.nekohasekai.sagernet.plugin.hysteria"
+        applicationId = "moe.matsuri.exe.hysteria"
         versionCode = 1
-        versionName = "v1.0.5-1"
+        versionName = "1.1.0-1"
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.nekohasekai.sagernet.plugin.hysteria"
+    package="moe.matsuri.exe.hysteria"
     android:installLocation="internalOnly"
     tools:ignore="MissingLeanbackLauncher">
 
@@ -15,23 +15,14 @@
     <application
         android:allowBackup="false"
         android:extractNativeLibs="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="Hysteria Plugin">
         <provider
-            android:name="io.nekohasekai.sagernet.plugin.hysteria.BinaryProvider"
-            android:authorities="io.nekohasekai.sagernet.plugin.hysteria.BinaryProvider"
+            android:name=".BinaryProvider"
+            android:authorities="moe.matsuri.exe.hysteria.BinaryProvider"
             android:directBootAware="true"
             android:exported="true"
             tools:ignore="ExportedContentProvider">
-            <intent-filter>
-                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
-                <data
-                    android:host="io.nekohasekai.sagernet"
-                    android:path="/hysteria-plugin"
-                    android:scheme="plugin" />
-            </intent-filter>
 
             <meta-data
                 android:name="io.nekohasekai.sagernet.plugin.id"
