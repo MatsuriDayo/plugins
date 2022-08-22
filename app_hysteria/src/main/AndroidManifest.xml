@@ -23,6 +23,16 @@
             android:directBootAware="true"
             android:exported="true"
             tools:ignore="ExportedContentProvider">
+            <intent-filter>
+                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
+                <data
+                    android:host="moe.matsuri.lite"
+                    android:path="/hysteria-plugin"
+                    android:scheme="plugin" />
+            </intent-filter>
 
             <meta-data
                 android:name="io.nekohasekai.sagernet.plugin.id"

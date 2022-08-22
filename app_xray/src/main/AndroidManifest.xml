@@ -21,7 +21,7 @@
             <intent-filter>
                 <action android:name="io.nekohasekai.sagernet.plugin.ACTION_NATIVE_PLUGIN" />
                 <data
-                    android:host="io.nekohasekai.sagernet"
+                    android:host="moe.matsuri.lite"
                     android:path="/moe.matsuri.plugin.xray"
                     android:scheme="plugin" />
             </intent-filter>
