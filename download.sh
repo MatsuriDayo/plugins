@@ -43,7 +43,7 @@ download_brook() {
 }
 
 download_hysteria() {
-  VERSION="v1.2.0-2"
+  VERSION="v1.2.1-1"
   mkdir_libs "app_hysteria/libs"
 
   dl_and_chmod arm64-v8a/libhysteria.so "https://github.com/MatsuriDayo/hysteria/releases/download/$VERSION/hysteria-linux-arm64"
