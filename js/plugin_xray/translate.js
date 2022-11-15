@@ -116,6 +116,10 @@ export var translates = {
         "zh_CN": "流控",
         "": "Flow Control",
     },
+    "serverFlowVision": {
+        "zh_CN": "流控",
+        "": "Flow Control",
+    },
     "serverAllowInsecure": {
         "zh_CN": "允许不安全的连接",
         "": "Allow insecure",
