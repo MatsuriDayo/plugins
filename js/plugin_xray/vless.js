@@ -32,7 +32,7 @@ class vlessClass {
         this.defaultSharedStorage.serverALPN = ""
         this.defaultSharedStorage.serverCertificates = ""
         this.defaultSharedStorage.serverFlow = "xtls-rprx-origin"
-        this.defaultSharedStorage.serverFlowVision = "xtls-rprx-vision"
+        this.defaultSharedStorage.serverFlowVision = ""
         this.defaultSharedStorage.serverAllowInsecure = false
 
         for (var k in this.defaultSharedStorage) {
@@ -278,6 +278,7 @@ class vlessClass {
                         "key": "serverFlowVision",
                         "icon": "ic_baseline_stream_24",
                         "entries": {
+                            "none": "",
                             "xtls-rprx-vision": "xtls-rprx-vision",
                             "xtls-rprx-vision-udp443": "xtls-rprx-vision-udp443"
                         }
