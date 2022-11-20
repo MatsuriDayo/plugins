@@ -14,6 +14,14 @@ unzip_xray() {
   rm -rf tmp xray.zip
 }
 
+unzip_singbox() {
+  rm -rf tmp
+  mkdir tmp
+  tar -zxvf singbox.tar.gz -C tmp
+  mv tmp/sing-box-"$2"-android-arm64/sing-box "$1"/libsingbox.so
+  rm -rf tmp singbox.tar.gz
+}
+
 download_xray() {
   VERSION="v1.6.4"
   mkdir_libs "app_xray/libs"
@@ -26,6 +34,13 @@ download_xray() {
   unzip_xray x86
   curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-64.zip"
   unzip_xray x86_64
+}
+
+download_singbox() {
+  VERSION="1.1-beta15"
+  mkdir_libs "app_singbox/libs"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-android-arm64.tar.gz"
+  unzip_singbox arm64-v8a $VERSION
 }
 
 dl_and_chmod() {
