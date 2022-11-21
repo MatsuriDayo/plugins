@@ -9,6 +9,6 @@ android {
     defaultConfig {
         applicationId = "moe.matsuri.plugin.singbox"
         versionCode = 1
-        versionName = "v1.1-beta15"
+        versionName = "v1.1-beta16"
     }
 }

@@ -37,7 +37,7 @@ download_xray() {
 }
 
 download_singbox() {
-  VERSION="1.1-beta15"
+  VERSION="1.1-beta16"
   mkdir_libs "app_singbox/libs"
   curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-android-arm64.tar.gz"
   unzip_singbox arm64-v8a $VERSION
