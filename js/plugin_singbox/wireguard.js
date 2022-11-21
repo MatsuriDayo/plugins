@@ -154,7 +154,8 @@ class wireguardClass {
             interface_name: "wg0",
             local_address: wg.serverLocalAddress
               .split("\n")
-              .map((item) => item.trim()),
+              .map((item) => item.trim())
+              .filter((item) => item.length > 0),
             private_key: wg.serverPrivateKey,
             peer_public_key: wg.serverCertificates,
             pre_shared_key: wg.serverPeerPreSharedKey,
