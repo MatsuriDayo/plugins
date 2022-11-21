@@ -1,6 +1,6 @@
 import { vless } from "./vless.js"
 import { ss2022 } from "./ss2022.js"
-import { util } from "./common/util.js"
+import { util } from "../common/util.js"
 import { LANG } from "./translate.js"
 
 // Init

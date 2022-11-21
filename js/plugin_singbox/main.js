@@ -1,5 +1,5 @@
 import { shadowTls } from "./shadowtls.js"
-import { util } from "./common/util.js"
+import { util } from "../common/util.js"
 import { LANG } from "./translate.js"
 
 // Init

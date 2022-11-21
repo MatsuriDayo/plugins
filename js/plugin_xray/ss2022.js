@@ -1,7 +1,6 @@
-import { util } from "./common/util.js";
-import { commomClass } from "./common/common.js"
+import { util } from "../common/util.js"
+import { commomClass } from "../common/common.js"
 import { TR } from "./translate.js"
-import { Base64 } from 'js-base64';
 
 class ss2022Class {
     constructor() {
