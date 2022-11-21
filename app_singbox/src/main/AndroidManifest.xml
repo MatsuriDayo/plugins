@@ -8,7 +8,7 @@
         android:allowBackup="false"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Sing-Box Plugin">
+        android:label="sing-box plugin">
         <provider
             android:name=".BinaryProvider"
             android:authorities="moe.matsuri.plugin.singbox.BinaryProvider"
