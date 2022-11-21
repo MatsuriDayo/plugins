@@ -3,7 +3,7 @@ import { commomClass } from "../common/common.js";
 import { TR } from "./translate.js";
 import { Base64 } from "js-base64";
 
-class shadowTlsClass {
+class wireguardClass {
   constructor() {
     this.sharedStorage = {};
     this.defaultSharedStorage = {};
@@ -17,11 +17,11 @@ class shadowTlsClass {
     this.defaultSharedStorage.serverAddress = "127.0.0.1";
     this.defaultSharedStorage.serverPort = "1080";
     // end of default keys
-    this.defaultSharedStorage.serverMethod = "2022-blake3-aes-128-gcm";
-    this.defaultSharedStorage.serverPassword = "";
-    this.defaultSharedStorage.shadowTlsServerName = "";
-    this.defaultSharedStorage.shadowTlsServerPassword = "";
-    this.defaultSharedStorage.shadowTlsVersion = "2";
+    this.defaultSharedStorage.serverLocalAddress = "";
+    this.defaultSharedStorage.serverPrivateKey = "";
+    this.defaultSharedStorage.serverCertificates = "";
+    this.defaultSharedStorage.serverPeerPreSharedKey = "";
+    this.defaultSharedStorage.serverMTU = "1420";
 
     for (var k in this.defaultSharedStorage) {
       let v = this.defaultSharedStorage[k];
@@ -54,6 +54,16 @@ class shadowTlsClass {
         preferences: [
           {
             type: "EditTextPreference",
+            key: "serverLocalAddress",
+            icon: "ic_baseline_domain_24",
+          },
+          {
+            type: "EditTextPreference",
+            key: "serverPrivateKey",
+            icon: "ic_baseline_vpn_key_24",
+          },
+          {
+            type: "EditTextPreference",
             key: "serverAddress",
             icon: "ic_hardware_router",
           },
@@ -65,44 +75,19 @@ class shadowTlsClass {
           },
           {
             type: "EditTextPreference",
-            key: "shadowTlsServerName",
+            key: "serverCertificates",
             icon: "ic_action_copyright",
           },
           {
             type: "EditTextPreference",
-            key: "shadowTlsServerPassword",
-            icon: "ic_baseline_person_24",
+            key: "serverPeerPreSharedKey",
+            icon: "ic_settings_password",
             summaryProvider: "PasswordSummaryProvider",
-          },
-          {
-            type: "SimpleMenuPreference",
-            key: "shadowTlsVersion",
-            icon: "ic_notification_enhanced_encryption",
-            entries: {
-              1: "1",
-              2: "2",
-            },
-          },
-          {
-            type: "SimpleMenuPreference",
-            key: "serverMethod",
-            icon: "ic_notification_enhanced_encryption",
-            entries: {
-              "2022-blake3-aes-128-gcm": "2022-blake3-aes-128-gcm",
-              "2022-blake3-aes-256-gcm": "2022-blake3-aes-256-gcm",
-              "2022-blake3-chacha20-poly1305": "2022-blake3-chacha20-poly1305",
-              "aes-128-gcm": "aes-128-gcm",
-              "aes-192-gcm": "aes-192-gcm",
-              "aes-256-gcm": "aes-256-gcm",
-              "chacha20-ietf-poly1305": "chacha20-ietf-poly1305",
-              "xchacha20-ietf-poly1305": "xchacha20-ietf-poly1305",
-            },
           },
           {
             type: "EditTextPreference",
-            key: "serverPassword",
-            icon: "ic_baseline_person_24",
-            summaryProvider: "PasswordSummaryProvider",
+            key: "serverMTU",
+            icon: "baseline_public_24",
           },
         ],
       },
@@ -143,7 +128,7 @@ class shadowTlsClass {
   buildAllConfig(b64Str) {
     try {
       let args = util.decodeB64Str(b64Str);
-      let ss = util.decodeB64Str(args.sharedStorage);
+      let wg = util.decodeB64Str(args.sharedStorage);
 
       let t0 = {
         log: {
@@ -161,27 +146,19 @@ class shadowTlsClass {
         ],
         outbounds: [
           {
-            type: "shadowsocks",
-            method: ss.serverMethod,
-            password: ss.serverPassword,
-            detour: "shadowtls-out",
-            multiplex: {
-              enabled: true,
-              max_connections: 4,
-              min_streams: 4,
-            },
-          },
-          {
-            type: "shadowtls",
-            tag: "shadowtls-out",
+            type: "wireguard",
+            tag: "wireguard-out",
             server: args.finalAddress,
             server_port: args.finalPort,
-            version: parseInt(ss.shadowTlsVersion, 10),
-            password: ss.shadowTlsServerPassword,
-            tls: {
-              enabled: true,
-              server_name: ss.shadowTlsServerName,
-            },
+            system_interface: false,
+            interface_name: "wg0",
+            local_address: wg.serverLocalAddress
+              .split("\n")
+              .map((item) => item.trim()),
+            private_key: wg.serverPrivateKey,
+            peer_public_key: wg.serverCertificates,
+            pre_shared_key: wg.serverPeerPreSharedKey,
+            mtu: parseInt(wg.serverMTU),
           },
         ],
       };
@@ -203,4 +180,4 @@ class shadowTlsClass {
   }
 }
 
-export const shadowTls = new shadowTlsClass();
+export const wireguard = new wireguardClass();
