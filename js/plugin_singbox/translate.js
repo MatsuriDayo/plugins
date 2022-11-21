@@ -35,9 +35,17 @@ export var translates = {
         "zh_CN": "服务器端口",
         "": "Server Port",
     },
-     "serverName": {
-        "zh_CN": "伪装域名",
-        "": "Server Name",
+    "shadowTlsServerName": {
+        "zh_CN": "ShadowTLS 伪装域名",
+        "": "ShadowTLS Server Name",
+    },
+    "shadowTlsVersion": {
+        "zh_CN": "ShadowTLS 版本",
+        "": "ShadowTLS Version",
+    },
+    "shadowTlsServerPassword": {
+        "zh_CN": "ShadowTLS 密码",
+        "": "ShadowTLS Password",
     },
     "serverUserId": {
         "zh_CN": "用户 ID",

@@ -3,7 +3,7 @@ import { commomClass } from "./common/common.js"
 import { TR } from "./translate.js"
 import { Base64 } from 'js-base64';
 
-class ss2022Class {
+class shadowTlsClass {
     constructor() {
         this.sharedStorage = {}
         this.defaultSharedStorage = {}
@@ -19,7 +19,9 @@ class ss2022Class {
         // end of default keys
         this.defaultSharedStorage.serverMethod = "2022-blake3-aes-128-gcm"
         this.defaultSharedStorage.serverPassword = ""
-        this.defaultSharedStorage.serverName = ""
+        this.defaultSharedStorage.shadowTlsServerName = ""
+        this.defaultSharedStorage.shadowTlsServerPassword = ""
+        this.defaultSharedStorage.shadowTlsVersion = "2"
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k]
@@ -64,8 +66,23 @@ class ss2022Class {
                     },
                     {
                         "type": "EditTextPreference",
-                        "key": "serverName",
+                        "key": "shadowTlsServerName",
                         "icon": "ic_action_copyright"
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "shadowTlsServerPassword",
+                        "icon": "ic_baseline_person_24",
+                        "summaryProvider": "PasswordSummaryProvider",
+                    },
+                    {
+                        "type": "SimpleMenuPreference",
+                        "key": "shadowTlsVersion",
+                        "icon": "ic_notification_enhanced_encryption",
+                        "entries": {
+                            "1": "1",
+                            "2": "2",
+                        }
                     },
                     {
                         "type": "SimpleMenuPreference",
@@ -134,40 +151,41 @@ class ss2022Class {
                     "disabled": false,
                     "level": "warn",
                     "timestamp": true
-                 },
-                 "inbounds": [
-                     {
-                         "type": "socks",
-                         "tag": "socks-in",
-                         "listen": "127.0.0.1",
-                         "listen_port": args.port
-                     }
-                 ],
-                 "outbounds": [
-                     {
-                         "type": "shadowsocks",
-                         "method": ss.serverMethod,
-                         "password": ss.serverPassword,
-                         "detour": "shadowtls-out",
-                         "multiplex": {
-                             "enabled": true,
-                             "max_connections": 4,
-                             "min_streams": 4
-                         }
-                     },
-                     {
-                         "type": "shadowtls",
-                         "tag": "shadowtls-out",
-                         "server": args.finalAddress,
-                         "server_port": args.finalPort,
-                         "version": 2,
-                         "tls": {
-                             "enabled": true,
-                             "server_name": ss.serverName
-                         }
-                     }
-                 ]
-             }
+                },
+                "inbounds": [
+                    {
+                        "type": "socks",
+                        "tag": "socks-in",
+                        "listen": "127.0.0.1",
+                        "listen_port": args.port
+                    }
+                ],
+                "outbounds": [
+                    {
+                        "type": "shadowsocks",
+                        "method": ss.serverMethod,
+                        "password": ss.serverPassword,
+                        "detour": "shadowtls-out",
+                        "multiplex": {
+                            "enabled": true,
+                            "max_connections": 4,
+                            "min_streams": 4
+                        }
+                    },
+                    {
+                        "type": "shadowtls",
+                        "tag": "shadowtls-out",
+                        "server": args.finalAddress,
+                        "server_port": args.finalPort,
+                        "version": parseInt(ss.shadowTlsVersion, 10),
+                        "password": ss.shadowTlsServerPassword,
+                        "tls": {
+                            "enabled": true,
+                            "server_name": ss.shadowTlsServerName
+                        }
+                    }
+                ]
+            }
 
             let v = {}
             v.nekoCommands = ["%exe%", "run", "--config", "config.json"]
@@ -186,4 +204,4 @@ class ss2022Class {
     }
 }
 
-export const ss2022 = new ss2022Class()
+export const shadowTls = new shadowTlsClass()

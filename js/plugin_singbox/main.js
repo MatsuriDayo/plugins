@@ -1,4 +1,4 @@
-import { ss2022 } from "./ss2022.js"
+import { shadowTls } from "./shadowtls.js"
 import { util } from "./common/util.js"
 import { LANG } from "./translate.js"
 
@@ -31,7 +31,7 @@ export function nekoInit(b64Str) {
 
 export function nekoProtocol(protocolId) {
     if (protocolId == "ShadowTLS") {
-        return ss2022
+        return shadowTls
     }
 }
 
