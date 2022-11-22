@@ -13,7 +13,7 @@ export function nekoInit(b64Str) {
     let plgConfig = {
         "ok": true,
         "reason": "",
-        "minVersion": 1,
+        "minVersion": 2,
         "protocols": [
             {
                 "protocolId": "VLESS",

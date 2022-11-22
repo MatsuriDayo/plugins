@@ -13,12 +13,12 @@ export function nekoInit(b64Str) {
   let plgConfig = {
     ok: true,
     reason: "",
-    minVersion: 1,
+    minVersion: 2,
     protocols: [
       {
         protocolId: "ShadowTLS",
         haveStandardLink: false,
-        canShare: true,
+        canShare: false,
         canMux: false,
         canMapping: true,
         canTCPing: true,
@@ -28,10 +28,10 @@ export function nekoInit(b64Str) {
       {
         protocolId: "WireGuard",
         haveStandardLink: false,
-        canShare: true,
+        canShare: false,
         canMux: false,
         canMapping: true,
-        canTCPing: true,
+        canTCPing: false,
         canICMPing: true,
         needBypassRootUid: false,
       },
