@@ -52,4 +52,4 @@ export function nekoProtocol(protocolId) {
 try {
   window.nekoInit = nekoInit;
   window.nekoProtocol = nekoProtocol;
-} catch (error) {}
+} catch (error) { }

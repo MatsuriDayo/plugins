@@ -43,7 +43,7 @@ class shadowTlsClass {
     this._setShareLink();
   }
 
-  _setShareLink() {}
+  _setShareLink() { }
 
   // UI Interface
 
@@ -125,7 +125,7 @@ class shadowTlsClass {
   }
 
   // 设置界面创建后调用
-  onPreferenceCreated() {}
+  onPreferenceCreated() { }
 
   // 保存时调用（混合编辑后的值）
   sharedStorageFromProfileCache() {
@@ -138,7 +138,7 @@ class shadowTlsClass {
 
   // Interface
 
-  parseShareLink(b64Str) {}
+  parseShareLink(b64Str) { }
 
   buildAllConfig(b64Str) {
     try {

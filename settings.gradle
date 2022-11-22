@@ -5,7 +5,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Neko Plugins"
+rootProject.name = "Matsuri Plugins"
 
 include ':common'
 include ':app_xray'
