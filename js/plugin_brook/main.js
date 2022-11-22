@@ -1,4 +1,4 @@
-import { util } from "./common/util.js"
+import { util } from "../common/util.js"
 import { brook } from "./brook.js"
 import { LANG } from "./translate.js"
 

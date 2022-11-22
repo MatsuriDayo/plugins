@@ -1,4 +1,4 @@
-import { Base64 } from 'js-base64';
+import { Base64 } from 'js-base64'
 
 //fuck Chrome, force use core-js URL
 const configurator = require('core-js/configurator');

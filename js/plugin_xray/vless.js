@@ -1,7 +1,7 @@
-import { util } from "./common/util.js";
-import { commomClass } from "./common/common.js"
+import { util } from "../common/util.js"
+import { commomClass } from "../common/common.js"
 import { TR } from "./translate.js"
-import { Base64 } from 'js-base64';
+import { Base64 } from 'js-base64'
 
 class vlessClass {
     constructor() {
@@ -32,6 +32,7 @@ class vlessClass {
         this.defaultSharedStorage.serverALPN = ""
         this.defaultSharedStorage.serverCertificates = ""
         this.defaultSharedStorage.serverFlow = "xtls-rprx-origin"
+        this.defaultSharedStorage.serverFlowVision = ""
         this.defaultSharedStorage.serverAllowInsecure = false
 
         for (var k in this.defaultSharedStorage) {
@@ -130,6 +131,9 @@ class vlessClass {
                     }
                     if (this.sharedStorage.serverCertificates.isNotBlank()) {
                         builder.searchParams.set("cert", this.sharedStorage.serverCertificates)
+                    }
+                    if (this.sharedStorage.serverFlowVision.isNotBlank()) {
+                        builder.searchParams.set("flow", this.sharedStorage.serverFlowVision)
                     }
                     break
                 }
@@ -270,6 +274,16 @@ class vlessClass {
                         }
                     },
                     {
+                        "type": "SimpleMenuPreference",
+                        "key": "serverFlowVision",
+                        "icon": "ic_baseline_stream_24",
+                        "entries": {
+                            "none": "",
+                            "xtls-rprx-vision": "xtls-rprx-vision",
+                            "xtls-rprx-vision-udp443": "xtls-rprx-vision-udp443"
+                        }
+                    },
+                    {
                         "type": "SwitchPreference",
                         "key": "serverAllowInsecure",
                         "icon": "ic_notification_enhanced_encryption",
@@ -384,8 +398,10 @@ class vlessClass {
                 neko.setPreferenceVisibility("serverSecurityCategory", true)
                 if (newValue == "tls") {
                     neko.setPreferenceVisibility("serverFlow", false)
+                    neko.setPreferenceVisibility("serverFlowVision", true)
                 } else if (newValue == "xtls") {
                     neko.setPreferenceVisibility("serverFlow", true)
+                    neko.setPreferenceVisibility("serverFlowVision", false)
                 }
             }
         }
@@ -430,6 +446,9 @@ class vlessClass {
                 })
                 util.ifNotNull(url.searchParams.get("cert"), (it) => {
                     this.sharedStorage.serverCertificates = it
+                })
+                util.ifNotNull(url.searchParams.get("flow"), (it) => {
+                    this.sharedStorage.serverFlowVision = it
                 })
                 break
             }
@@ -637,6 +656,7 @@ class vlessClass {
                     if (ss.serverALPN.isNotBlank()) t2["alpn"] = ss.serverALPN.lines()
                     if (ss.serverCertificates.isNotBlank()) t2["certificates"] = { "certificate": ss.serverCertificates.lines() }
                     t0.outbounds[0].streamSettings["tlsSettings"] = t2
+                    t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlowVision
                     break
                 }
                 case "xtls": {

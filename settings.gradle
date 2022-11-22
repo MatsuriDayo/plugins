@@ -5,9 +5,10 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Neko Plugins"
+rootProject.name = "Matsuri Plugins"
 
 include ':common'
 include ':app_xray'
 include ':app_brook'
 include ':app_hysteria'
+include ':app_singbox'
