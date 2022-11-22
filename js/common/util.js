@@ -84,6 +84,10 @@ try {
 
 // add utils to prototype
 
+Object.prototype.global_export = function (name, f) {
+    Object.prototype[name] = f
+}
+
 String.prototype.contains = function (s) { return this.indexOf(s) >= 0 }
 String.prototype.isBlank = function () { return util.isBlank(this) }
 String.prototype.isNotBlank = function () { return util.isNotBlank(this) }

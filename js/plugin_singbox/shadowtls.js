@@ -1,7 +1,6 @@
 import { util } from "../common/util.js";
 import { commomClass } from "../common/common.js";
-import { TR } from "./translate.js";
-import { Base64 } from "js-base64";
+import { TR } from "../common/translate.js";
 
 class shadowTlsClass {
   constructor() {
@@ -71,13 +70,13 @@ class shadowTlsClass {
           {
             type: "EditTextPreference",
             key: "shadowTlsServerPassword",
-            icon: "ic_baseline_person_24",
+            icon: "ic_settings_password",
             summaryProvider: "PasswordSummaryProvider",
           },
           {
             type: "SimpleMenuPreference",
             key: "shadowTlsVersion",
-            icon: "ic_notification_enhanced_encryption",
+            icon: "ic_baseline_layers_24",
             entries: {
               1: "1",
               2: "2",
@@ -101,7 +100,7 @@ class shadowTlsClass {
           {
             type: "EditTextPreference",
             key: "serverPassword",
-            icon: "ic_baseline_person_24",
+            icon: "ic_settings_password",
             summaryProvider: "PasswordSummaryProvider",
           },
         ],

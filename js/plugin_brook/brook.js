@@ -1,6 +1,6 @@
 import { util } from "../common/util.js";
 import { commomClass } from "../common/common.js"
-import { TR } from "./translate.js"
+import { TR } from "../common/translate.js"
 
 class brookClass {
     constructor() {
@@ -122,6 +122,7 @@ class brookClass {
                     {
                         "type": "EditTextPreference",
                         "key": "serverPath",
+                        "title": TR("serverPath_ws"),
                         "icon": "ic_baseline_format_align_left_24",
                     },
                     {

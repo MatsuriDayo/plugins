@@ -1,6 +1,6 @@
 import { shadowTls } from "./shadowtls.js";
 import { util } from "../common/util.js";
-import { LANG } from "./translate.js";
+import { LANG } from "../common/translate.js";
 import { wireguard } from "./wireguard.js";
 
 // Init
@@ -49,7 +49,5 @@ export function nekoProtocol(protocolId) {
 }
 
 // export interface to browser
-try {
-  window.nekoInit = nekoInit;
-  window.nekoProtocol = nekoProtocol;
-} catch (error) { }
+global_export("nekoInit", nekoInit)
+global_export("nekoProtocol", nekoProtocol)

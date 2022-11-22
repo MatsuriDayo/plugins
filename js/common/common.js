@@ -27,11 +27,14 @@ export class commomClass {
 
     _applyTranslateToPreferenceScreenConfig(sb, TR) {
         sb.forEach((category) => {
-            category["title"] = TR(category["key"], category["title"])
+            if (category["title"] == null) {
+                category["title"] = TR(category["key"])
+            }
             category.preferences.forEach((preference) => {
-                preference["title"] = TR(preference["key"], preference["title"])
+                if (preference["title"] == null) {
+                    preference["title"] = TR(preference["key"])
+                }
             })
         })
     }
-
 }

@@ -1,6 +1,6 @@
 import { util } from "../common/util.js"
 import { commomClass } from "../common/common.js"
-import { TR } from "./translate.js"
+import { TR } from "../common/translate.js"
 
 class ss2022Class {
     constructor() {

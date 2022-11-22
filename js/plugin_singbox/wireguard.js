@@ -1,7 +1,6 @@
 import { util } from "../common/util.js";
 import { commomClass } from "../common/common.js";
-import { TR } from "./translate.js";
-import { Base64 } from "js-base64";
+import { TR } from "../common/translate.js";
 
 class wireguardClass {
   constructor() {
@@ -17,11 +16,11 @@ class wireguardClass {
     this.defaultSharedStorage.serverAddress = "127.0.0.1";
     this.defaultSharedStorage.serverPort = "1080";
     // end of default keys
-    this.defaultSharedStorage.serverLocalAddress = "";
-    this.defaultSharedStorage.serverPrivateKey = "";
-    this.defaultSharedStorage.serverCertificates = "";
-    this.defaultSharedStorage.serverPeerPreSharedKey = "";
-    this.defaultSharedStorage.serverMTU = "1420";
+    this.defaultSharedStorage.wireguardLocalAddress = "";
+    this.defaultSharedStorage.wireguardPrivateKey = "";
+    this.defaultSharedStorage.wireguardCertificates = "";
+    this.defaultSharedStorage.wireguardPeerPreSharedKey = "";
+    this.defaultSharedStorage.wireguardMTU = "1420";
 
     for (var k in this.defaultSharedStorage) {
       let v = this.defaultSharedStorage[k];
@@ -54,12 +53,12 @@ class wireguardClass {
         preferences: [
           {
             type: "EditTextPreference",
-            key: "serverLocalAddress",
+            key: "wireguardLocalAddress",
             icon: "ic_baseline_domain_24",
           },
           {
             type: "EditTextPreference",
-            key: "serverPrivateKey",
+            key: "wireguardPrivateKey",
             icon: "ic_baseline_vpn_key_24",
           },
           {
@@ -75,18 +74,18 @@ class wireguardClass {
           },
           {
             type: "EditTextPreference",
-            key: "serverCertificates",
+            key: "wireguardCertificates",
             icon: "ic_action_copyright",
           },
           {
             type: "EditTextPreference",
-            key: "serverPeerPreSharedKey",
+            key: "wireguardPeerPreSharedKey",
             icon: "ic_settings_password",
             summaryProvider: "PasswordSummaryProvider",
           },
           {
             type: "EditTextPreference",
-            key: "serverMTU",
+            key: "wireguardMTU",
             icon: "baseline_public_24",
           },
         ],
@@ -152,14 +151,14 @@ class wireguardClass {
             server_port: args.finalPort,
             system_interface: false,
             interface_name: "wg0",
-            local_address: wg.serverLocalAddress
+            local_address: wg.wireguardLocalAddress
               .split("\n")
               .map((item) => item.trim())
               .filter((item) => item.length > 0),
-            private_key: wg.serverPrivateKey,
-            peer_public_key: wg.serverCertificates,
-            pre_shared_key: wg.serverPeerPreSharedKey,
-            mtu: parseInt(wg.serverMTU),
+            private_key: wg.wireguardPrivateKey,
+            peer_public_key: wg.wireguardCertificates,
+            pre_shared_key: wg.wireguardPeerPreSharedKey,
+            mtu: parseInt(wg.wireguardMTU),
           },
         ],
       };
