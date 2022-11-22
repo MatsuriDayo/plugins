@@ -37,15 +37,15 @@ download_xray() {
 }
 
 download_singbox() {
-  VERSION="1.1-beta16"
+  VERSION="1.1-beta17"
   mkdir_libs "app_singbox/libs"
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-android-arm64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/$VERSION/sing-box-$VERSION-android-arm64.tar.gz"
   unzip_singbox arm64-v8a
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-linux-armv7.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/$VERSION/sing-box-$VERSION-linux-armv7.tar.gz"
   unzip_singbox armeabi-v7a
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-linux-s390x.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/$VERSION/sing-box-$VERSION-linux-s390x.tar.gz"
   unzip_singbox x86
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v$VERSION/sing-box-$VERSION-android-amd64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/$VERSION/sing-box-$VERSION-android-amd64.tar.gz"
   unzip_singbox x86_64
 }
 
