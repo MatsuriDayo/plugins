@@ -1,7 +1,8 @@
+import { util } from "../common/util.js"
+import { LANG, LANG_TR } from "../common/translate.js"
+
 import { vless } from "./vless.js"
 import { ss2022 } from "./ss2022.js"
-import { util } from "../common/util.js"
-import { LANG } from "../common/translate.js"
 
 // Init
 
@@ -50,6 +51,16 @@ export function nekoProtocol(protocolId) {
     }
 }
 
+export function nekoAbout() {
+    switch (LANG_TR()) {
+        case "zh_CN":
+            return "这个插件是实验性的。如果在使用过程中遇到任何问题，请自行解决。"
+        default:
+            return "This plugin is experimental. If you have any problems during use, please solve them yourself."
+    }
+}
+
 // export interface to browser
 global_export("nekoInit", nekoInit)
 global_export("nekoProtocol", nekoProtocol)
+global_export("nekoAbout", nekoAbout)

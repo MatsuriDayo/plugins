@@ -1,13 +1,15 @@
 export var LANG = ""
 
-export function TR(key) {
-    var lang = LANG
-    if (LANG.startsWith("zh-")) lang = "zh_CN"
+export function LANG_TR() {
+    if (LANG.startsWith("zh-")) return "zh_CN"
+    return LANG
+}
 
+export function TR(key) {
     let transalte_item = translates[key]
     if (transalte_item == null) return "" // key not exist
 
-    let transalte_current_lang = transalte_item[lang]
+    let transalte_current_lang = transalte_item[LANG_TR()]
     if (transalte_current_lang == null) {
         let transalte_default_lang = transalte_item[""]
         if (transalte_default_lang == null) return key

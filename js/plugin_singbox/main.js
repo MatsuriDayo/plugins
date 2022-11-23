@@ -1,6 +1,7 @@
-import { shadowTls } from "./shadowtls.js";
 import { util } from "../common/util.js";
-import { LANG } from "../common/translate.js";
+import { LANG, LANG_TR } from "../common/translate.js";
+
+import { shadowTls } from "./shadowtls.js";
 import { wireguard } from "./wireguard.js";
 
 // Init
@@ -48,6 +49,20 @@ export function nekoProtocol(protocolId) {
   }
 }
 
+export function nekoAbout() {
+  switch (LANG_TR()) {
+    case "zh_CN":
+      return "作者：杰洛特\n" +
+        "GitHub: https://github.com/mliyuanbiao\n" +
+        "这个插件是实验性的。如果在使用过程中遇到任何问题，请自行解决。"
+    default:
+      return "Author: 杰洛特\n" +
+        "GitHub: https://github.com/mliyuanbiao\n" +
+        "This plugin is experimental. If you have any problems during use, please solve them yourself."
+  }
+}
+
 // export interface to browser
 global_export("nekoInit", nekoInit)
 global_export("nekoProtocol", nekoProtocol)
+global_export("nekoAbout", nekoAbout)
