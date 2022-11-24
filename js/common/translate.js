@@ -205,4 +205,12 @@ export var translates = {
     wireguardMTU: {
         "": "MTU",
     },
+    serverPlugin: {
+        "zh_CN": "插件",
+        "": "Plugin",
+    },
+    serverPluginConfigure: {
+        "zh_CN": "设置",
+        "": "Plugin Configure...",
+    }
 }

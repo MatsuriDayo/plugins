@@ -3,6 +3,7 @@ import { LANG, LANG_TR } from "../common/translate.js";
 
 import { shadowTls } from "./shadowtls.js";
 import { wireguard } from "./wireguard.js";
+import { ss2022 } from "./ss2022.js";
 
 // Init
 
@@ -16,6 +17,16 @@ export function nekoInit(b64Str) {
     reason: "",
     minVersion: 2,
     protocols: [
+      {
+        protocolId: "Shadowsocks",
+        haveStandardLink: false,
+        canShare: false,
+        canMux: false,
+        canMapping: true,
+        canTCPing: true,
+        canICMPing: true,
+        needBypassRootUid: false,
+      },
       {
         protocolId: "ShadowTLS",
         haveStandardLink: false,
@@ -42,7 +53,9 @@ export function nekoInit(b64Str) {
 }
 
 export function nekoProtocol(protocolId) {
-  if (protocolId == "ShadowTLS") {
+  if (protocolId == "Shadowsocks") {
+    return ss2022;
+  } else if (protocolId == "ShadowTLS") {
     return shadowTls;
   } else if (protocolId == "WireGuard") {
     return wireguard;
