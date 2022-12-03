@@ -54,9 +54,9 @@ export function nekoProtocol(protocolId) {
 export function nekoAbout() {
     switch (LANG_TR()) {
         case "zh_CN":
-            return "这个插件是实验性的。如果在使用过程中遇到任何问题，请自行解决。"
+            return "使用 Xray 内核提供 VLESS 等协议的实验性支持，效果未知。\n如果在使用过程中遇到任何问题，请自行解决。"
         default:
-            return "This plugin is experimental. If you have any problems during use, please solve them yourself."
+            return "Experimental support for protocols such as VLESS using the Xray core, effects unknown. \nIf you have any problems during use, please solve them yourself."
     }
 }
 

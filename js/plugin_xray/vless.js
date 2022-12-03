@@ -28,6 +28,7 @@ class vlessClass {
         this.defaultSharedStorage.serverSecurity = "none"
         this.defaultSharedStorage.grpcMultiMode = false
         // tls
+        this.defaultSharedStorage.utlsFingerprint = ""
         this.defaultSharedStorage.serverSNI = ""
         this.defaultSharedStorage.serverALPN = ""
         this.defaultSharedStorage.serverCertificates = ""
@@ -246,6 +247,17 @@ class vlessClass {
                 "key": "serverSecurityCategory",
                 "preferences": [
                     {
+                        "type": "SimpleMenuPreference",
+                        "key": "utlsFingerprint",
+                        "entries": {
+                            "": "",
+                            "chrome": "chrome",
+                            "firefox": "firefox",
+                            "safari": "safari",
+                            "randomized": "randomized",
+                        }
+                    },
+                    {
                         "type": "EditTextPreference",
                         "key": "serverSNI",
                         "icon": "ic_action_copyright"
@@ -396,13 +408,10 @@ class vlessClass {
                 neko.setPreferenceVisibility("serverSecurityCategory", false)
             } else {
                 neko.setPreferenceVisibility("serverSecurityCategory", true)
-                if (newValue == "tls") {
-                    neko.setPreferenceVisibility("serverFlow", false)
-                    neko.setPreferenceVisibility("serverFlowVision", true)
-                } else if (newValue == "xtls") {
-                    neko.setPreferenceVisibility("serverFlow", true)
-                    neko.setPreferenceVisibility("serverFlowVision", false)
-                }
+                let isXTLS = (newValue == "xtls")
+                neko.setPreferenceVisibility("serverFlow", isXTLS)
+                neko.setPreferenceVisibility("serverFlowVision", !isXTLS)
+                neko.setPreferenceVisibility("utlsFingerprint", !isXTLS)
             }
         }
     }
@@ -653,6 +662,7 @@ class vlessClass {
                         "serverName": ss.serverSNI,
                         "allowInsecure": ss.serverAllowInsecure,
                     }
+                    if (ss.utlsFingerprint.isNotBlank()) t2["fingerprint"] = ss.utlsFingerprint
                     if (ss.serverALPN.isNotBlank()) t2["alpn"] = ss.serverALPN.lines()
                     if (ss.serverCertificates.isNotBlank()) t2["certificates"] = { "certificate": ss.serverCertificates.lines() }
                     t0.outbounds[0].streamSettings["tlsSettings"] = t2
