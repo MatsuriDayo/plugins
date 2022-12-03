@@ -7,7 +7,7 @@ export function LANG_TR() {
 
 export function TR(key) {
     let transalte_item = translates[key]
-    if (transalte_item == null) return "" // key not exist
+    if (transalte_item == null) return key // key not exist
 
     let transalte_current_lang = transalte_item[LANG_TR()]
     if (transalte_current_lang == null) {
@@ -117,6 +117,10 @@ export var translates = {
     serverSNI: {
         "zh_CN": "服务器名称指示",
         "": "SNI",
+    },
+    utlsFingerprint: {
+        "zh_CN": "uTLS 指纹",
+        "": "uTLS Fingerprint",
     },
     serverALPN: {
         "zh_CN": "应用层协议协商",
