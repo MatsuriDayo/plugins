@@ -19,7 +19,9 @@ export function TR(key) {
     }
 }
 
-Object.prototype.global_debug_setlang = function (lang) { LANG = lang }
+Object.prototype.global_debug_setlang = function (lang) {
+    LANG = lang
+}
 
 // Translates
 
@@ -170,7 +172,22 @@ export var translates = {
     udpovertcp: {
         "": "UDP over TCP",
     },
-
+    serverShadowTls: {
+        "zh_CN": "ShadowTLS",
+        "": "ShadowTLS",
+    },
+    serverPlugin: {
+        "zh_CN": "插件",
+        "": "Plugin",
+    },
+    serverPluginConfigure: {
+        "zh_CN": "设置",
+        "": "Plugin Configure...",
+    },
+    serverUdpOverTcp: {
+        "zh_CN": "UDP over TCP",
+        "": "UDP over TCP",
+    },
     // shadowTLS
     shadowTlsServerName: {
         "zh_CN": "ShadowTLS 伪装域名",
@@ -204,13 +221,5 @@ export var translates = {
     },
     wireguardMTU: {
         "": "MTU",
-    },
-    serverPlugin: {
-        "zh_CN": "插件",
-        "": "Plugin",
-    },
-    serverPluginConfigure: {
-        "zh_CN": "设置",
-        "": "Plugin Configure...",
     }
 }
