@@ -188,6 +188,10 @@ export var translates = {
         "zh_CN": "UDP over TCP",
         "": "UDP over TCP",
     },
+    serverUdpOverTcp_summary: {
+        "zh_CN": "启用 UDP over TCP 协议",
+        "": "Enable the UDP over TCP protocol.",
+    },
     // shadowTLS
     shadowTlsServerName: {
         "zh_CN": "ShadowTLS 伪装域名",
@@ -221,5 +225,37 @@ export var translates = {
     },
     wireguardMTU: {
         "": "MTU",
+    },
+    serverObfs: {
+        "zh_CN": "混淆密码",
+        "": "Obfuscation Password",
+    },
+    serverAuthType: {
+        "zh_CN": "认证类型",
+        "": "Authentication Type",
+    },
+    serverAuthPayload: {
+        "zh_CN": "认证载荷",
+        "": "Authentication Payload",
+    },
+    serverUploadSpeed: {
+        "zh_CN": "最大上行 (Mbps)",
+        "": "Max Upload Speed (in Mbps)",
+    },
+    serverDownloadSpeed: {
+        "zh_CN": "最大下行 (Mbps)",
+        "": "Max Download Speed (in Mbps)",
+    },
+    serverStreamReceiveWindow: {
+        "zh_CN": "QUIC 流接收窗口",
+        "": "QUIC Stream Receive Window",
+    },
+    serverConnectionReceiveWindow: {
+        "zh_CN": "QUIC 连接接收窗口",
+        "": "QUIC Connection Receive Window",
+    },
+    serverDisableMtuDiscovery: {
+        "zh_CN": "禁用路径最大传输单元发现",
+        "": "Disable Path MTU Discovery",
     }
 }

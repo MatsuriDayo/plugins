@@ -3,6 +3,7 @@ import {LANG, LANG_TR} from "../common/translate.js";
 
 import {wireguard} from "./wireguard.js";
 import {shadowsocks, shadowTls} from "./shadowsocks.js";
+import {hysteria} from "./hysteria";
 
 // Init
 
@@ -45,6 +46,15 @@ export function nekoInit(b64Str) {
                 canTCPing: false,
                 canICMPing: true,
                 needBypassRootUid: false,
+            }, {
+                protocolId: "Hysteria",
+                haveStandardLink: false,
+                canShare: false,
+                canMux: false,
+                canMapping: true,
+                canTCPing: false,
+                canICMPing: true,
+                needBypassRootUid: false,
             },
         ],
     };
@@ -58,6 +68,8 @@ export function nekoProtocol(protocolId) {
         return shadowTls;
     } else if (protocolId === "WireGuard") {
         return wireguard;
+    } else if (protocolId === "Hysteria") {
+        return hysteria;
     }
 }
 

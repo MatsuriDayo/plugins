@@ -22,7 +22,7 @@ class ssClass {
         this.defaultSharedStorage.serverPassword = "";
         this.defaultSharedStorage.serverPlugin = "";
         this.defaultSharedStorage.serverPluginConfigure = "";
-        this.defaultSharedStorage.serverUdpOverTcp = "false";
+        this.defaultSharedStorage.serverUdpOverTcp = false;
         // shadow-tls
         this.defaultSharedStorage.shadowTlsServerName = "";
         this.defaultSharedStorage.shadowTlsServerPassword = "";
@@ -91,13 +91,10 @@ class ssClass {
                         summaryProvider: "PasswordSummaryProvider",
                     },
                     {
-                        "type": "SimpleMenuPreference",
+                        "type": "SwitchPreference",
                         "key": "serverUdpOverTcp",
                         "icon": "baseline_wrap_text_24",
-                        "entries": {
-                            "false": "false",
-                            "true": "true",
-                        }
+                        "summary": TR("serverUdpOverTcp_summary")
                     },
                 ],
             },
@@ -212,7 +209,7 @@ class ssClass {
                     password: ss.serverPassword,
                     plugin: ss.serverPlugin,
                     plugin_opts: ss.serverPluginConfigure,
-                    udp_over_tcp: ss.serverUdpOverTcp === "true",
+                    udp_over_tcp: ss.serverUdpOverTcp,
                     detour: "shadowtls-out",
                 }, {
                     type: "shadowtls",
@@ -235,7 +232,7 @@ class ssClass {
                     password: ss.serverPassword,
                     plugin: ss.serverPlugin,
                     plugin_opts: ss.serverPluginConfigure,
-                    udp_over_tcp: ss.serverUdpOverTcp === "true"
+                    udp_over_tcp: ss.serverUdpOverTcp,
                 },)
             }
             let v = {};
