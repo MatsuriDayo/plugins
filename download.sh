@@ -23,7 +23,7 @@ unzip_singbox() {
 }
 
 download_xray() {
-  VERSION="v1.6.5"
+  VERSION="v1.7.2"
   mkdir_libs "app_xray/libs"
 
   curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-android-arm64-v8a.zip"
@@ -38,9 +38,9 @@ download_xray() {
 
 download_singbox() {
   mkdir_libs "app_singbox/libs"
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.1-rc1/sing-box-1.1-rc1-android-arm64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.1.2/sing-box-1.1.2-android-arm64.tar.gz"
   unzip_singbox arm64-v8a
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.1-rc1/sing-box-1.1-rc1-android-amd64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.1.2/sing-box-1.1.2-android-amd64.tar.gz"
   unzip_singbox x86_64
 }
 
