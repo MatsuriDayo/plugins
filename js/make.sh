@@ -1,7 +1,8 @@
 set -e
 
-# SN Plugin -> no js build
+# moe.matsur.exe.* -> no js build
 [ $1 == "hysteria" ] && exit
+[ $1 == "tuic" ] && exit
 
 HTML=../app_$1/html
 SRC=./plugin_$1
