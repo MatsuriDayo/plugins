@@ -8,7 +8,7 @@ setupAll()
 android {
     defaultConfig {
         applicationId = "moe.matsuri.exe.hysteria"
-        versionCode = 5
-        versionName = "1.3.1-1"
+        versionCode = 6
+        versionName = "1.3.3-1"
     }
 }
