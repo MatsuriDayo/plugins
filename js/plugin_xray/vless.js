@@ -254,6 +254,12 @@ class vlessClass {
                             "chrome": "chrome",
                             "firefox": "firefox",
                             "safari": "safari",
+                            "ios": "ios",
+                            "android": "android",
+                            "edge": "edge",
+                            "360": "360",
+                            "qq": "qq",
+                            "random": "random",
                             "randomized": "randomized",
                         }
                     },
