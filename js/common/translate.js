@@ -118,6 +118,10 @@ export var translates = {
         "zh_CN": "服务器名称指示",
         "": "SNI",
     },
+    utlsEnabled: {
+        "zh_CN": "uTLS 开关",
+        "": "uTLS Enabled",
+    },
     utlsFingerprint: {
         "zh_CN": "uTLS 指纹",
         "": "uTLS Fingerprint",
