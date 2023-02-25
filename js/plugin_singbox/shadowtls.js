@@ -21,6 +21,8 @@ class shadowTlsClass {
     this.defaultSharedStorage.shadowTlsServerName = "";
     this.defaultSharedStorage.shadowTlsServerPassword = "";
     this.defaultSharedStorage.shadowTlsVersion = "2";
+    this.defaultSharedStorage.utlsEnabled = false;
+    this.defaultSharedStorage.utlsFingerprint = "chrome";
 
     for (var k in this.defaultSharedStorage) {
       let v = this.defaultSharedStorage[k];
@@ -80,6 +82,7 @@ class shadowTlsClass {
             entries: {
               1: "1",
               2: "2",
+              3: "3"
             },
           },
           {
@@ -103,6 +106,31 @@ class shadowTlsClass {
             icon: "ic_settings_password",
             summaryProvider: "PasswordSummaryProvider",
           },
+          {
+            type: "SimpleMenuPreference",
+            key: "utlsEnabled",
+            icon: "ic_baseline_vpn_key_24",
+            entries: {
+              "true": "true",
+              "false": "false",
+            },
+          },
+          {
+            type: "SimpleMenuPreference",
+            key: "utlsFingerprint",
+            icon: "ic_baseline_fiber_manual_record_24",
+            entries: {
+                "chrome": "chrome",
+                "firefox": "firefox",
+                "edge": "edge",
+                "safari": "safari",
+                "360": "360",
+                "qq": "qq",
+                "ios": "ios",
+                "android": "android",
+                "random": "random",
+            }
+        },
         ],
       },
     ];
@@ -122,9 +150,20 @@ class shadowTlsClass {
       this.common.setKV(k, this.sharedStorage[k]);
     }
   }
+  // 开启设置界面时调用
 
   // 设置界面创建后调用
-  onPreferenceCreated() { }
+  onPreferenceCreated() {
+    let this2 = this
+
+    function listenOnPreferenceChangedNow(key) {
+      neko.listenOnPreferenceChanged(key)
+      this2._onPreferenceChanged(key, this2.sharedStorage[key])
+    }
+
+    listenOnPreferenceChangedNow("utlsEnabled")
+    listenOnPreferenceChangedNow("shadowTlsVersion")
+   }
 
   // 保存时调用（混合编辑后的值）
   sharedStorageFromProfileCache() {
@@ -135,6 +174,26 @@ class shadowTlsClass {
     return JSON.stringify(this.sharedStorage);
   }
 
+  // 用户修改 preference 时调用
+  onPreferenceChanged(b64Str) {
+    let args = util.decodeB64Str(b64Str)
+    this._onPreferenceChanged(args.key, args.newValue)
+  }
+
+  _onPreferenceChanged(key, newValue) {
+    if (key == "utlsEnabled") {
+      neko.setPreferenceVisibility("utlsFingerprint", false)
+      if (newValue == "true") {
+        neko.setPreferenceVisibility("utlsFingerprint", true)
+      }
+    } else if (key == "shadowTlsVersion") {
+      neko.setPreferenceVisibility("shadowTlsServerPassword", true)
+      if (newValue == "1") {
+        neko.setPreferenceVisibility("shadowTlsServerPassword", false)
+      }
+    }
+  }
+
   // Interface
 
   parseShareLink(b64Str) { }
@@ -143,6 +202,13 @@ class shadowTlsClass {
     try {
       let args = util.decodeB64Str(b64Str);
       let ss = util.decodeB64Str(args.sharedStorage);
+
+      // convert string to boolean
+      if (ss.utlsEnabled === "true"){
+        ss.utlsEnabled = true
+      } else {
+        ss.utlsEnabled = false
+      }
 
       let t0 = {
         log: {
@@ -180,10 +246,19 @@ class shadowTlsClass {
             tls: {
               enabled: true,
               server_name: ss.shadowTlsServerName,
+              utls: {
+                enabled: ss.utlsEnabled,
+                fingerprint: ss.utlsFingerprint
+              }
             },
           },
         ],
       };
+
+      // check shadowTlsVersion if = 1, remove password entity from config
+      if (ss.shadowTlsVersion == 1) {
+        delete t0.outbounds[1].password;
+      }
 
       let v = {};
       v.nekoCommands = ["%exe%", "run", "--config", "config.json"];
