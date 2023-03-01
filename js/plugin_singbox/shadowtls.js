@@ -21,7 +21,7 @@ class shadowTlsClass {
     this.defaultSharedStorage.shadowTlsServerName = "";
     this.defaultSharedStorage.shadowTlsServerPassword = "";
     this.defaultSharedStorage.shadowTlsVersion = "2";
-    this.defaultSharedStorage.utlsEnabled = false;
+    this.defaultSharedStorage.utlsEnabled = "false";
     this.defaultSharedStorage.utlsFingerprint = "chrome";
 
     for (var k in this.defaultSharedStorage) {
