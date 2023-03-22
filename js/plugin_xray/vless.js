@@ -12,7 +12,7 @@ class vlessClass {
 
     _initDefaultSharedStorage() {
         // start of default keys
-        this.defaultSharedStorage.jsVersion = 1
+        this.defaultSharedStorage.jsVersion = 2
         this.defaultSharedStorage.insecureHint = ""
         this.defaultSharedStorage.name = ""
         this.defaultSharedStorage.serverAddress = "127.0.0.1"
@@ -32,9 +32,12 @@ class vlessClass {
         this.defaultSharedStorage.serverSNI = ""
         this.defaultSharedStorage.serverALPN = ""
         this.defaultSharedStorage.serverCertificates = ""
-        this.defaultSharedStorage.serverFlow = "xtls-rprx-origin"
         this.defaultSharedStorage.serverFlowVision = ""
         this.defaultSharedStorage.serverAllowInsecure = false
+        // reality
+        this.defaultSharedStorage.publicKey = ""
+        this.defaultSharedStorage.shortId = ""
+        this.defaultSharedStorage.spiderX = ""
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k]
@@ -61,8 +64,6 @@ class vlessClass {
     _insecureHint() {
         if (this.sharedStorage.serverSecurity == "none") {
             return TR("insecure_cleartext")
-        } else if (this.sharedStorage.serverSecurity == "xtls") {
-            return TR("insecure_xtls")
         }
         return ""
     }
@@ -138,15 +139,21 @@ class vlessClass {
                     }
                     break
                 }
-                case "xtls": {
+                case "reality": {
                     if (this.sharedStorage.serverSNI.isNotBlank()) {
                         builder.searchParams.set("sni", this.sharedStorage.serverSNI)
                     }
-                    if (this.sharedStorage.serverALPN.isNotBlank()) {
-                        builder.searchParams.set("alpn", this.sharedStorage.serverALPN)
-                    }
                     if (this.sharedStorage.serverFlow.isNotBlank()) {
                         builder.searchParams.set("flow", this.sharedStorage.serverFlow)
+                    }
+                    if (this.sharedStorage.publicKey.isNotBlank()) {
+                        builder.searchParams.set("publicKey", this.sharedStorage.publicKey)
+                    }
+                    if (this.sharedStorage.shortId.isNotBlank()) {
+                        builder.searchParams.set("shortId", this.sharedStorage.shortId)
+                    }
+                    if (this.sharedStorage.spiderX.isNotBlank()) {
+                        builder.searchParams.set("spiderX", this.sharedStorage.spiderX)
                     }
                     break
                 }
@@ -233,7 +240,7 @@ class vlessClass {
                         "entries": {
                             "none": "none",
                             "tls": "tls",
-                            "xtls": "xtls",
+                            "reality": "reality",
                         }
                     },
                     {
@@ -280,19 +287,6 @@ class vlessClass {
                     },
                     {
                         "type": "SimpleMenuPreference",
-                        "key": "serverFlow",
-                        "icon": "ic_baseline_stream_24",
-                        "entries": {
-                            "xtls-rprx-origin": "xtls-rprx-origin",
-                            "xtls-rprx-origin-udp443": "xtls-rprx-origin-udp443",
-                            "xtls-rprx-direct": "xtls-rprx-direct",
-                            "xtls-rprx-direct-udp443": "xtls-rprx-direct-udp443",
-                            "xtls-rprx-splice": "xtls-rprx-splice",
-                            "xtls-rprx-splice-udp443": "xtls-rprx-splice-udp443",
-                        }
-                    },
-                    {
-                        "type": "SimpleMenuPreference",
                         "key": "serverFlowVision",
                         "icon": "ic_baseline_stream_24",
                         "entries": {
@@ -307,8 +301,22 @@ class vlessClass {
                         "icon": "ic_notification_enhanced_encryption",
                         "summary": TR("serverAllowInsecure_summary")
                     },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "publicKey",
+                        "icon": "ic_baseline_vpn_key_24"
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "shortId",
+                        "icon": "ic_baseline_texture_24"
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "spiderX",
+                        "icon": "ic_baseline_format_align_left_24"
+                    },
                 ]
-
             }
         ]
         this.common._applyTranslateToPreferenceScreenConfig(sb, TR)
@@ -414,10 +422,10 @@ class vlessClass {
                 neko.setPreferenceVisibility("serverSecurityCategory", false)
             } else {
                 neko.setPreferenceVisibility("serverSecurityCategory", true)
-                let isXTLS = (newValue == "xtls")
-                neko.setPreferenceVisibility("serverFlow", isXTLS)
-                neko.setPreferenceVisibility("serverFlowVision", !isXTLS)
-                neko.setPreferenceVisibility("utlsFingerprint", !isXTLS)
+                let isREALITY = (newValue == "reality")
+                neko.setPreferenceVisibility("publicKey", isREALITY)
+                neko.setPreferenceVisibility("shortId", isREALITY)
+                neko.setPreferenceVisibility("spiderX", isREALITY)
             }
         }
     }
@@ -467,16 +475,22 @@ class vlessClass {
                 })
                 break
             }
-            case "xtls": {
-                this.sharedStorage.serverSecurity = "xtls"
+            case "reality": {
+                this.sharedStorage.serverSecurity = "reality"
                 util.ifNotNull(url.searchParams.get("sni"), (it) => {
                     this.sharedStorage.serverSNI = it
                 })
-                util.ifNotNull(url.searchParams.get("alpn"), (it) => {
-                    this.sharedStorage.serverALPN = it
-                })
                 util.ifNotNull(url.searchParams.get("flow"), (it) => {
                     this.sharedStorage.serverFlow = it
+                })
+                util.ifNotNull(url.searchParams.get("publicKey"), (it) => {
+                    this.sharedStorage.publicKey = it
+                })
+                util.ifNotNull(url.searchParams.get("shortId"), (it) => {
+                    this.sharedStorage.shortId = it
+                })
+                util.ifNotNull(url.searchParams.get("spiderX"), (it) => {
+                    this.sharedStorage.spiderX = it
                 })
                 break
             }
@@ -548,9 +562,6 @@ class vlessClass {
             let canMux = false
             if (ss.serverNetwork == "tcp" || ss.serverNetwork == "ws" || ss.serverNetwork == "h2") {
                 canMux = true
-            }
-            if (ss.serverSecurity == "xtls") {
-                canMux = false
             }
 
             let t0 = {
@@ -675,14 +686,16 @@ class vlessClass {
                     t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlowVision
                     break
                 }
-                case "xtls": {
+                case "reality": {
                     let t2 = {
                         "serverName": ss.serverSNI,
-                        "allowInsecure": ss.serverAllowInsecure,
                     }
-                    if (ss.serverCertificates.isNotBlank()) t2["certificates"] = { "certificate": ss.serverCertificates.lines() }
-                    t0.outbounds[0].streamSettings["xtlsSettings"] = t2
-                    t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlow
+                    if (ss.utlsFingerprint.isNotBlank()) t2["fingerprint"] = ss.utlsFingerprint
+                    if (ss.publicKey.isNotBlank()) t2["publicKey"] = ss.publicKey
+                    if (ss.shortId.isNotBlank()) t2["shortId"] = ss.shortId
+                    if (ss.spiderX.isNotBlank()) t2["spiderX"] = ss.spiderX
+                    t0.outbounds[0].streamSettings["realitySettings"] = t2
+                    t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlowVision
                     break
                 }
             }
