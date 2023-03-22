@@ -426,6 +426,9 @@ class vlessClass {
                 neko.setPreferenceVisibility("publicKey", isREALITY)
                 neko.setPreferenceVisibility("shortId", isREALITY)
                 neko.setPreferenceVisibility("spiderX", isREALITY)
+                neko.setPreferenceVisibility("serverALPN", !isREALITY)
+                neko.setPreferenceVisibility("serverCertificates", !isREALITY)
+                neko.setPreferenceVisibility("serverAllowInsecure", !isREALITY)
             }
         }
     }
@@ -561,7 +564,7 @@ class vlessClass {
 
             let canMux = false
             if (ss.serverNetwork == "tcp" || ss.serverNetwork == "ws" || ss.serverNetwork == "h2") {
-                canMux = true
+                canMux = ss.serverFlowVision.isBlank()
             }
 
             let t0 = {
