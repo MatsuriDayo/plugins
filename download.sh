@@ -38,9 +38,9 @@ download_xray() {
 
 download_singbox() {
   mkdir_libs "app_singbox/libs"
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-arm64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta10/sing-box-1.2-beta10-android-arm64.tar.gz"
   unzip_singbox arm64-v8a
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-amd64.tar.gz"
+  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta10/sing-box-1.2-beta10-android-amd64.tar.gz"
   unzip_singbox x86_64
 }
 
