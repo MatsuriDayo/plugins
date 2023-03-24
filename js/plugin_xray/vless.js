@@ -290,7 +290,7 @@ class vlessClass {
                         "key": "serverFlowVision",
                         "icon": "ic_baseline_stream_24",
                         "entries": {
-                            "none": "",
+                            "": "",
                             "xtls-rprx-vision": "xtls-rprx-vision",
                             "xtls-rprx-vision-udp443": "xtls-rprx-vision-udp443"
                         }
