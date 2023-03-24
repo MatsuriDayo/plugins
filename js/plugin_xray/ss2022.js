@@ -82,7 +82,6 @@ class ss2022Class {
                         "type": "SwitchPreference",
                         "key": "serverUoT",
                         "icon": "baseline_wrap_text_24",
-                        "summary": TR("serverUoT_summary")
                     },
                 ]
             }
