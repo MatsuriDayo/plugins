@@ -18,6 +18,8 @@ class ss2022Class {
         // end of default keys
         this.defaultSharedStorage.serverMethod = "2022-blake3-aes-128-gcm"
         this.defaultSharedStorage.serverPassword = ""
+        // UDP over TCP
+        this.defaultSharedStorage.serverUoT = false
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k]
@@ -75,6 +77,12 @@ class ss2022Class {
                         "key": "serverPassword",
                         "icon": "ic_baseline_person_24",
                         "summaryProvider": "PasswordSummaryProvider",
+                    },
+                    {
+                        "type": "SwitchPreference",
+                        "key": "serverUoT",
+                        "icon": "baseline_wrap_text_24",
+                        "summary": TR("serverUoT_summary")
                     },
                 ]
             }
@@ -142,6 +150,7 @@ class ss2022Class {
                                     "port": args.finalPort,
                                     "method": ss.serverMethod,
                                     "password": ss.serverPassword,
+                                    "uot": ss.serverUoT,
                                 }
                             ]
                         }

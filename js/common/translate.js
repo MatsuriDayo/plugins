@@ -205,4 +205,8 @@ export var translates = {
     wireguardMTU: {
         "": "MTU",
     },
+    serverUoT_summary: {
+        "zh_CN": "启用UDP over TCP",
+        "": "Enable UDP over TCP",
+    },
 }
