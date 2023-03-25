@@ -154,6 +154,18 @@ export var translates = {
         "zh_CN": "该配置 (不安全) 能够被检测识别，传输的内容对审查者完全可见，并且无法抵抗中间人篡改通讯内容.",
         "": "The configuration (insecure) can be detected and identified, the transmission is fully visible to the censor and is not resistant to man-in-the-middle tampering with the content of the communication.",
     },
+    serverUoT: {
+        "": "UDP over TCP",
+    },
+    publicKey: {
+        "": "PublicKey",
+    },
+    shortId: {
+        "": "ShortId",
+    },
+    spiderX: {
+        "": "SpiderX",
+    },
 
     // Brook
     serverProtocol: {
@@ -204,8 +216,5 @@ export var translates = {
     },
     wireguardMTU: {
         "": "MTU",
-    },
-    serverUoT: {
-        "": "UDP over TCP",
     },
 }
