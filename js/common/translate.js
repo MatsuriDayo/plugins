@@ -158,6 +158,18 @@ export var translates = {
         "zh_CN": "该配置 (XTLS) 能够被检测识别.",
         "": "This configuration (XTLS) can be detected and identified.",
     },
+    publicKey: {
+        "zh_CN": "公钥 (Public Key)",
+        "": "Public Key",
+    },
+    shortId: {
+        "zh_CN": "短ID (Short Id)",
+        "": "Short Id",
+    },
+    spiderX: {
+        "zh_CN": "蜘蛛X (SpiderX)",
+        "": "SpiderX",
+    },
 
     // Brook
     serverProtocol: {

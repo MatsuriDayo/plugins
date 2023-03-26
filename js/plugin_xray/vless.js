@@ -35,6 +35,9 @@ class vlessClass {
         this.defaultSharedStorage.serverFlow = "xtls-rprx-origin"
         this.defaultSharedStorage.serverFlowVision = ""
         this.defaultSharedStorage.serverAllowInsecure = false
+        this.defaultSharedStorage.publicKey = ""
+        this.defaultSharedStorage.shortId = ""
+        this.defaultSharedStorage.spiderX = ""
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k]
@@ -150,6 +153,27 @@ class vlessClass {
                     }
                     break
                 }
+                case "reality": {
+                    if (this.sharedStorage.serverSNI.isNotBlank()) {
+                        builder.searchParams.set("sni", this.sharedStorage.serverSNI)
+                    }
+                    if (this.sharedStorage.serverALPN.isNotBlank()) {
+                        builder.searchParams.set("alpn", this.sharedStorage.serverALPN)
+                    }
+                    if (this.sharedStorage.serverFlowVision.isNotBlank()) {
+                        builder.searchParams.set("flow", this.sharedStorage.serverFlowVision)
+                    }
+                    if (this.sharedStorage.publicKey.isNotBlank()) {
+                        builder.searchParams.set("publicKey", this.sharedStorage.publicKey)
+                    }
+                    if (this.sharedStorage.shortId.isNotBlank()) {
+                        builder.searchParams.set("shortId", this.sharedStorage.shortId)
+                    }
+                    if (this.sharedStorage.spiderX.isNotBlank()) {
+                        builder.searchParams.set("spiderX", this.sharedStorage.spiderX)
+                    }
+                    break
+                }
             }
         }
 
@@ -234,6 +258,7 @@ class vlessClass {
                             "none": "none",
                             "tls": "tls",
                             "xtls": "xtls",
+                            "reality": "reality",
                         }
                     },
                     {
@@ -306,6 +331,18 @@ class vlessClass {
                         "key": "serverAllowInsecure",
                         "icon": "ic_notification_enhanced_encryption",
                         "summary": TR("serverAllowInsecure_summary")
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "publicKey"
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "shortId"
+                    },
+                    {
+                        "type": "EditTextPreference",
+                        "key": "spiderX"
                     },
                 ]
 
@@ -414,10 +451,19 @@ class vlessClass {
                 neko.setPreferenceVisibility("serverSecurityCategory", false)
             } else {
                 neko.setPreferenceVisibility("serverSecurityCategory", true)
-                let isXTLS = (newValue == "xtls")
-                neko.setPreferenceVisibility("serverFlow", isXTLS)
-                neko.setPreferenceVisibility("serverFlowVision", !isXTLS)
-                neko.setPreferenceVisibility("utlsFingerprint", !isXTLS)
+                if (newValue == "xtls") {
+                    neko.setPreferenceVisibility("serverFlow", true)
+                    neko.setPreferenceVisibility("serverFlowVision", false)
+                    neko.setPreferenceVisibility("utlsFingerprint", false)
+                    neko.setPreferenceVisibility("publicKey", false)
+                    neko.setPreferenceVisibility("shortId", false)
+                    neko.setPreferenceVisibility("spiderX", false)
+                }
+                if (newValue == "tls") {
+                    neko.setPreferenceVisibility("publicKey", false)
+                    neko.setPreferenceVisibility("shortId", false)
+                    neko.setPreferenceVisibility("spiderX", false)
+                }
             }
         }
     }
@@ -477,6 +523,31 @@ class vlessClass {
                 })
                 util.ifNotNull(url.searchParams.get("flow"), (it) => {
                     this.sharedStorage.serverFlow = it
+                })
+                break
+            }
+            case "reality": {
+                this.sharedStorage.serverSecurity = "reality"
+                util.ifNotNull(url.searchParams.get("alpn"), (it) => {
+                    this.sharedStorage.serverALPN = it
+                })
+                util.ifNotNull(url.searchParams.get("sni"), (it) => {
+                    this.sharedStorage.serverSNI = it
+                })
+                util.ifNotNull(url.searchParams.get("cert"), (it) => {
+                    this.sharedStorage.serverCertificates = it
+                })
+                util.ifNotNull(url.searchParams.get("flow"), (it) => {
+                    this.sharedStorage.serverFlowVision = it
+                })
+                util.ifNotNull(url.searchParams.get("publicKey"), (it) => {
+                    this.sharedStorage.publicKey = it
+                })
+                util.ifNotNull(url.searchParams.get("shortId"), (it) => {
+                    this.sharedStorage.shortId = it
+                })
+                util.ifNotNull(url.searchParams.get("spiderX"), (it) => {
+                    this.sharedStorage.spiderX = it
                 })
                 break
             }
@@ -684,6 +755,20 @@ class vlessClass {
                     t0.outbounds[0].streamSettings["xtlsSettings"] = t2
                     t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlow
                     break
+                }
+                case "reality": {
+                    let t2 = {
+                        "serverName": ss.serverSNI,
+                        "allowInsecure": ss.serverAllowInsecure,
+                    }
+                    if (ss.utlsFingerprint.isNotBlank()) t2["fingerprint"] = ss.utlsFingerprint
+                    if (ss.serverALPN.isNotBlank()) t2["alpn"] = ss.serverALPN.lines()
+                    if (ss.publicKey.isNotBlank()) t2["publicKey"] = ss.publicKey
+                    if (ss.shortId.isNotBlank()) t2["shortId"] = ss.shortId
+                    if (ss.spiderX.isNotBlank()) t2["spiderX"] = ss.spiderX
+                    if (ss.serverCertificates.isNotBlank()) t2["certificates"] = { "certificate": ss.serverCertificates.lines() }
+                    t0.outbounds[0].streamSettings["realitySettings"] = t2
+                    t0.outbounds[0].settings.vnext[0].users[0]["flow"] = ss.serverFlowVision
                 }
             }
 
