@@ -451,6 +451,7 @@ class vlessClass {
                 neko.setPreferenceVisibility("serverSecurityCategory", false)
             } else {
                 neko.setPreferenceVisibility("serverSecurityCategory", true)
+                neko.setPreferenceVisibility("serverFlow", false)
                 if (newValue == "xtls") {
                     neko.setPreferenceVisibility("serverFlow", true)
                     neko.setPreferenceVisibility("serverFlowVision", false)
@@ -620,7 +621,7 @@ class vlessClass {
             if (ss.serverNetwork == "tcp" || ss.serverNetwork == "ws" || ss.serverNetwork == "h2") {
                 canMux = true
             }
-            if (ss.serverSecurity == "xtls") {
+            if (ss.serverSecurity != "none" ) {
                 canMux = false
             }
 

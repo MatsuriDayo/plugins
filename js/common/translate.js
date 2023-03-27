@@ -167,7 +167,7 @@ export var translates = {
         "": "Short Id",
     },
     spiderX: {
-        "zh_CN": "蜘蛛X (SpiderX)",
+        "zh_CN": "爬虫X (SpiderX)",
         "": "SpiderX",
     },
 
