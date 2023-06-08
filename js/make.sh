@@ -3,6 +3,7 @@ set -e
 # moe.matsur.exe.* -> no js build
 [ $1 == "hysteria" ] && exit
 [ $1 == "tuic" ] && exit
+[ $1 == "tuic5" ] && exit
 
 HTML=../app_$1/html
 SRC=./plugin_$1

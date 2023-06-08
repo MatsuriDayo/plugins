@@ -45,7 +45,7 @@ download_singbox() {
 }
 
 dl_and_chmod() {
-  curl -Lso "$1" "$2" && chmod +x "$1"
+  curl -fLso "$1" "$2" && chmod +x "$1"
 }
 
 download_brook() {
@@ -73,6 +73,16 @@ download_tuic() {
 
   dl_and_chmod arm64-v8a/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-0.8.5-2-aarch64-android"
   dl_and_chmod x86_64/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-0.8.5-2-x86_64-android"
+}
+
+download_tuic5() {
+  VERSION="1.0.0"
+  mkdir_libs "app_tuic5/libs"
+
+  dl_and_chmod arm64-v8a/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-aarch64-linux-android"
+  dl_and_chmod armeabi-v7a/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-armv7-linux-androideabi"
+  dl_and_chmod x86/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-i686-linux-android"
+  dl_and_chmod x86_64/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-x86_64-linux-android"
 }
 
 download_"$1"

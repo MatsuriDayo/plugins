@@ -15,3 +15,4 @@ include ':app_singbox'
 
 include ':app_hysteria'
 include ':app_tuic'
+include ':app_tuic5'
