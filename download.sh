@@ -76,7 +76,7 @@ download_tuic() {
 }
 
 download_tuic5() {
-  VERSION="1.0.0-2"
+  VERSION="1.0.0-3"
   mkdir_libs "app_tuic5/libs"
 
   dl_and_chmod arm64-v8a/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-aarch64-linux-android"
