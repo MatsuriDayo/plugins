@@ -9,38 +9,45 @@ mkdir_libs() {
 
 unzip_xray() {
   rm -rf tmp
-  unzip -d tmp xray.zip
+  unzip -d tmp tmp.zip
   mv tmp/xray "$1"/libxray.so
-  rm -rf tmp xray.zip
+  rm -rf tmp tmp.zip
 }
 
 unzip_singbox() {
   rm -rf tmp
   mkdir tmp
-  tar -zxvf singbox.tar.gz -C tmp
+  tar -zxvf tmp.tar.gz -C tmp
   mv tmp/*/sing-box "$1"/libsingbox.so
-  rm -rf tmp singbox.tar.gz
+  rm -rf tmp tmp.tar.gz
+}
+
+unzip_juicity() {
+  rm -rf tmp
+  unzip -d tmp tmp.zip
+  mv tmp/juicity-client "$1"/libjuicity.so
+  rm -rf tmp tmp.zip
 }
 
 download_xray() {
   VERSION="v1.7.5"
   mkdir_libs "app_xray/libs"
 
-  curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-android-arm64-v8a.zip"
+  curl -Lso tmp.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-android-arm64-v8a.zip"
   unzip_xray arm64-v8a
-  curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-arm32-v7a.zip"
+  curl -Lso tmp.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-arm32-v7a.zip"
   unzip_xray armeabi-v7a
-  curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-32.zip"
+  curl -Lso tmp.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-32.zip"
   unzip_xray x86
-  curl -Lso xray.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-64.zip"
+  curl -Lso tmp.zip "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-64.zip"
   unzip_xray x86_64
 }
 
 download_singbox() {
   mkdir_libs "app_singbox/libs"
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-arm64.tar.gz"
+  curl -Lso tmp.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-arm64.tar.gz"
   unzip_singbox arm64-v8a
-  curl -Lso singbox.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-amd64.tar.gz"
+  curl -Lso tmp.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.2-beta5/sing-box-1.2-beta5-android-amd64.tar.gz"
   unzip_singbox x86_64
 }
 
@@ -83,6 +90,14 @@ download_tuic5() {
   dl_and_chmod armeabi-v7a/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-armv7-linux-androideabi"
   dl_and_chmod x86/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-i686-linux-android"
   dl_and_chmod x86_64/libtuic.so "https://github.com/MatsuriDayo/tuic/releases/download/rel/tuic-client-"$VERSION"-x86_64-linux-android"
+}
+
+download_juicity() {
+  VERSION="v0.1.2"
+  mkdir_libs "app_juicity/libs"
+
+  curl -Lso tmp.zip "https://github.com/juicity/juicity/releases/download/"$VERSION"/juicity-android-arm64.zip"
+  unzip_juicity arm64-v8a
 }
 
 download_"$1"
