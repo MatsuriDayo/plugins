@@ -13,3 +13,5 @@ local.properties
 /app_*/build
 /app_*/libs
 /app_*/html
+
+/tmp

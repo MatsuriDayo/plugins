@@ -29,6 +29,15 @@ unzip_juicity() {
   rm -rf tmp tmp.zip
 }
 
+unzip_naive() {
+  rm -rf tmp
+  mkdir -p tmp
+  tar -xf tmp.tar.xz -C tmp
+
+  mv tmp/*/naive "$1"/libnaive.so
+  rm -rf tmp*
+}
+
 download_xray() {
   VERSION="v1.7.5"
   mkdir_libs "app_xray/libs"
@@ -98,6 +107,16 @@ download_juicity() {
 
   curl -Lso tmp.zip "https://github.com/juicity/juicity/releases/download/"$VERSION"/juicity-android-arm64.zip"
   unzip_juicity arm64-v8a
+}
+
+download_naive() {
+  source ./get_version.sh naive
+  mkdir_libs "app_naive/libs"
+
+  curl -Lso tmp.tar.xz "https://github.com/klzgrad/naiveproxy/releases/download/${VERSION}/naiveproxy-${VERSION}-android-arm64.tar.xz"
+  unzip_naive arm64-v8a
+  curl -Lso tmp.tar.xz "https://github.com/klzgrad/naiveproxy/releases/download/${VERSION}/naiveproxy-${VERSION}-android-x64.tar.xz"
+  unzip_naive x86_64
 }
 
 download_"$1"
