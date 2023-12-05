@@ -5,6 +5,7 @@ set -e
 [ $1 == "tuic" ] && exit
 [ $1 == "tuic5" ] && exit
 [ $1 == "naive" ] && exit
+[ $1 == "mieru" ] && exit
 
 HTML=../app_$1/html
 SRC=./plugin_$1
