@@ -38,6 +38,15 @@ unzip_naive() {
   rm -rf tmp*
 }
 
+unzip_mieru() {
+  rm -rf tmp
+  mkdir -p tmp
+  tar -xf tmp.tar.gz -C tmp
+
+  mv tmp/mieru "$1"/libmieru.so
+  rm -rf tmp*
+}
+
 download_xray() {
   VERSION="v1.7.5"
   mkdir_libs "app_xray/libs"
@@ -117,6 +126,17 @@ download_naive() {
   unzip_naive arm64-v8a
   curl -Lso tmp.tar.xz "https://github.com/klzgrad/naiveproxy/releases/download/${VERSION}/naiveproxy-${VERSION}-android-x64.tar.xz"
   unzip_naive x86_64
+}
+
+download_mieru() {
+  TAG="v2.2.0"
+  VERSION="2.2.0"
+  mkdir_libs "app_mieru/libs"
+
+  curl -Lso tmp.tar.gz "https://github.com/enfein/mieru/releases/download/${TAG}/mieru_${VERSION}_android_arm64.tar.gz"
+  unzip_mieru arm64-v8a
+  curl -Lso tmp.tar.gz "https://github.com/enfein/mieru/releases/download/${TAG}/mieru_${VERSION}_android_amd64.tar.gz"
+  unzip_mieru x86_64
 }
 
 download_"$1"
