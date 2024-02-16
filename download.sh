@@ -129,8 +129,8 @@ download_naive() {
 }
 
 download_mieru() {
-  TAG="v2.2.0"
-  VERSION="2.2.0"
+  TAG="v2.4.0"
+  VERSION="2.4.0"
   mkdir_libs "app_mieru/libs"
 
   curl -Lso tmp.tar.gz "https://github.com/enfein/mieru/releases/download/${TAG}/mieru_${VERSION}_android_arm64.tar.gz"
