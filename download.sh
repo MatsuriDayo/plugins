@@ -111,7 +111,7 @@ download_tuic5() {
 }
 
 download_juicity() {
-  VERSION="v0.3.0"
+  VERSION="v0.4.0"
   mkdir_libs "app_juicity/libs"
 
   curl -Lso tmp.zip "https://github.com/juicity/juicity/releases/download/"$VERSION"/juicity-android-arm64.zip"
