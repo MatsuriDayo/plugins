@@ -16,7 +16,7 @@ class juicityClass {
         this.defaultSharedStorage.serverAddress = "127.0.0.1";
         this.defaultSharedStorage.serverPort = "1080";
         // end of default keys
-        this.defaultSharedStorage.uuid = "00000000-0000-0000-0000-000000000000";
+        this.defaultSharedStorage.uuid = "";
         this.defaultSharedStorage.password = "";
         this.defaultSharedStorage.sni = "";
         this.defaultSharedStorage.allowInsecure = false;
@@ -69,43 +69,50 @@ class juicityClass {
                 title: TR("serverSettings"),
                 preferences: [
                     {
-                        type: "EditTextPreference",
-                        key: "serverAddress",
-                        icon: "ic_hardware_router",
+                        "type": "EditTextPreference",
+                        "key": "serverAddress",
+                        "icon": "ic_hardware_router",
+                        "title": "Server"
                     },
                     {
-                        type: "EditTextPreference",
-                        key: "serverPort",
-                        icon: "ic_maps_directions_boat",
-                        EditTextPreferenceModifiers: "Port",
+                        "type": "EditTextPreference",
+                        "key": "serverPort",
+                        "icon": "ic_maps_directions_boat",
+                        "EditTextPreferenceModifiers": "Port",
+                        "title": "Remote Port"
                     },
                     //
                     {
                         "type": "EditTextPreference",
                         "key": "uuid",
                         "icon": "ic_baseline_person_24",
+                        "title": "UUID"
                     },
                     {
                         "type": "EditTextPreference",
                         "key": "password",
                         "icon": "ic_settings_password",
                         "summaryProvider": "PasswordSummaryProvider",
+                        "title": "Password"
                     },
                     //
                     {
                         "type": "EditTextPreference",
                         "key": "sni",
-                        "icon": "ic_action_copyright"
+                        "icon": "ic_action_copyright",
+                        "title": "Server Name Indication"
                     },
                     {
                         "type": "SwitchPreference",
                         "key": "allowInsecure",
                         "icon": "ic_notification_enhanced_encryption",
+                        "title": "Allow Insecure"
                     },
                     {
                         "type": "EditTextPreference",
                         "key": "congestionControl",
                         "icon": "ic_baseline_stream_24",
+                        "title": "Congestion Control"
                     },
                 ],
             },
