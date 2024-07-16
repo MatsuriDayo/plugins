@@ -7,7 +7,9 @@
     <application
         android:allowBackup="false"
         android:extractNativeLibs="true"
-        android:label="Juicity For NekoBox">
+        android:icon="@mipmap/ic_launcher"
+        android:label="Juicity For NekoBox"
+        android:roundIcon="@mipmap/ic_launcher_round">
         <provider
             android:name=".BinaryProvider"
             android:authorities="moe.matsuri.plugin.juicity.BinaryProvider"

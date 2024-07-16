@@ -8,8 +8,8 @@ setupAll()
 android {
     defaultConfig {
         applicationId = "moe.matsuri.plugin.juicity"
-        versionCode = 2
-        versionName = "v0.3.0"
+        versionCode = 3
+        versionName = "v0.4.3"
         splits.abi {
             reset()
             include("arm64-v8a")

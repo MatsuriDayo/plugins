@@ -209,4 +209,17 @@ export var translates = {
     wireguardMTU: {
         "": "MTU",
     },
+    
+    // Juicity
+    juicityCongestionControl: {
+        "zh_CN": "拥塞控制",
+        "": "Congestion Control",
+    },
+    juicitySNI: {
+        "": "SNI",
+    },
+    juicityPinnedCertchainSha256: {
+        "zh_CN": "固定证书链 SHA256 (可选)",
+        "": "Pinned Certchain SHA256 (Optional)"
+    },
 }

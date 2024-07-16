@@ -16,11 +16,12 @@ class juicityClass {
         this.defaultSharedStorage.serverAddress = "127.0.0.1";
         this.defaultSharedStorage.serverPort = "1080";
         // end of default keys
-        this.defaultSharedStorage.uuid = "00000000-0000-0000-0000-000000000000";
+        this.defaultSharedStorage.uuid = "";
         this.defaultSharedStorage.password = "";
         this.defaultSharedStorage.sni = "";
         this.defaultSharedStorage.allowInsecure = false;
         this.defaultSharedStorage.congestionControl = "bbr";
+        this.defaultSharedStorage.pinnedCertchainSha256 = "";
 
         for (var k in this.defaultSharedStorage) {
             let v = this.defaultSharedStorage[k];
@@ -58,6 +59,9 @@ class juicityClass {
         if (this.sharedStorage.allowInsecure) {
             builder.searchParams.set("allow_insecure", "1")
         }
+        if (this.sharedStorage.pinnedCertchainSha256) {
+            builder.searchParams.set("pinned_certchain_sha256", this.sharedStorage.pinnedCertchainSha256)
+        }
         this.sharedStorage.shareLink = builder.toString()
     }
 
@@ -84,28 +88,42 @@ class juicityClass {
                         "type": "EditTextPreference",
                         "key": "uuid",
                         "icon": "ic_baseline_person_24",
+                        "title": TR("serverUserId"),
                     },
                     {
                         "type": "EditTextPreference",
                         "key": "password",
                         "icon": "ic_settings_password",
                         "summaryProvider": "PasswordSummaryProvider",
+                        "title": TR("serverPassword"),
                     },
                     //
                     {
                         "type": "EditTextPreference",
                         "key": "sni",
-                        "icon": "ic_action_copyright"
+                        "icon": "ic_action_copyright",
+                        "title": TR("juicitySNI"),
                     },
                     {
                         "type": "SwitchPreference",
                         "key": "allowInsecure",
                         "icon": "ic_notification_enhanced_encryption",
+                        "title": TR("serverAllowInsecure"),
+                    },
+                    {
+                        "type": "SimpleMenuPreference",
+                        "key": "congestionControl",
+                        "icon": "ic_baseline_stream_24",
+                        "entries": {
+                            "bbr": "bbr"
+                        },
+                        "title": TR("juicityCongestionControl"),
                     },
                     {
                         "type": "EditTextPreference",
-                        "key": "congestionControl",
-                        "icon": "ic_baseline_stream_24",
+                        "key": "pinnedCertchainSha256",
+                        "icon": "ic_baseline_vpn_key_24",
+                        "title": TR("juicityPinnedCertchainSha256")
                     },
                 ],
             },
@@ -136,6 +154,8 @@ class juicityClass {
             neko.listenOnPreferenceChanged(key)
             this2._onPreferenceChanged(key, this2.sharedStorage[key])
         }
+
+        listenOnPreferenceChangedNow("pinnedCertchainSha256")
     }
 
     // 保存时调用（混合编辑后的值）
@@ -154,6 +174,13 @@ class juicityClass {
     }
 
     _onPreferenceChanged(key, newValue) {
+        if (key == "pinnedCertchainSha256") {
+            try {
+                this.common.setKV(key, decodeURIComponent(newValue))
+            } catch (error) {
+                neko.logError(error.toString());
+            }
+        }
     }
 
     // Interface
@@ -169,7 +196,7 @@ class juicityClass {
 
         var serverAddress = util.unwrapIpv6(url.hostname)
         this.sharedStorage.serverAddress = serverAddress
-        this.sharedStorage.serverPort = url.host.replace(serverAddress, "").substringAfter(":")
+        this.sharedStorage.serverPort = url.port
         this.sharedStorage.uuid = url.username
         this.sharedStorage.password = url.password
         this.sharedStorage.name = decodeURIComponent(url.hash.substringAfter("#"))
@@ -181,7 +208,10 @@ class juicityClass {
             this.sharedStorage.sni = it
         })
         util.ifNotNull(url.searchParams.get("allow_insecure"), (it) => {
-            if (it == "1" || it == "true") this.sharedStorage.allowInsecure = it
+            if (it == "1" || it == "true") this.sharedStorage.allowInsecure = true
+        })
+        util.ifNotNull(url.searchParams.get("pinned_certchain_sha256"), (it) => {
+            this.sharedStorage.pinnedCertchainSha256 = it
         })
 
         this._onSharedStorageUpdated()
@@ -201,15 +231,18 @@ class juicityClass {
                 "sni": ss.sni,
                 "allow_insecure": ss.allowInsecure,
                 "congestion_control": ss.congestionControl,
+                "pinned_certchain_sha256": ss.pinnedCertchainSha256,
                 "log_level": "info",
                 "protect_path": "protect_path"
             };
 
+            let uniqueConfigName = 'config-' + Math.random().toString(36).slice(2) + Date.now() + '.json';
+
             let v = {};
-            v.nekoCommands = ["%exe%", "run", "-c", "config.json"];
+            v.nekoCommands = ["%exe%", "run", "-c", uniqueConfigName];
             v.nekoRunConfigs = [
                 {
-                    name: "config.json",
+                    name: uniqueConfigName,
                     content: JSON.stringify(configObject),
                 },
             ];
